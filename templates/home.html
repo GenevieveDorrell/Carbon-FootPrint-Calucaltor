@@ -1,0 +1,41 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+    
+  <title>Reverse Geocoding</title>
+  <meta name="description" content="homepage">
+  <meta name="Genevieve" content="Reverse Geocoding">
+
+  <link rel="stylesheet" href="static/css/home.css"/>
+
+</head>
+
+<body>
+    <h1>Reverse Geocoding</h1>    
+    <!--<input type="button" id="get_file">
+    <input type="button" id="my-button" value="Select Files">
+    <input type="file" name="my_file" id="my-file">
+    <button id="get_file">upload gpx file</button>-->
+    <div align="center">        
+        <form method=post enctype=multipart/form-data>
+            <input type=file name=file>
+            <input type=submit value=Upload>
+          </form>        
+    </div>
+    
+    <div align="center"> 
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          <ul class=flashes>
+          {% for message in messages %}
+            <p>{{ message }}</p>
+          {% endfor %}
+          </ul>
+        {% endif %}
+      {% endwith %}
+      {% block body %}{% endblock %}
+  </div>
+</body>
+</html>

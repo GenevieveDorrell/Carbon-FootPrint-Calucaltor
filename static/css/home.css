@@ -1,0 +1,21 @@
+body {
+    background-color: lightblue;
+    font-family: "Lucida Console", Courier, monospace;
+  }
+  
+  h1 {
+    color: navy;
+    text-align: center;
+  }
+  button {
+    background-color: aqua;
+    border: none;
+    color: navy;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 18px;
+    border-radius: 12px;
+    font-family: "Lucida Console", Courier, monospace;
+  }
