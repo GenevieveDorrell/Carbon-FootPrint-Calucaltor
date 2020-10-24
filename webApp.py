@@ -15,8 +15,7 @@ app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 
 @app.route('/', methods=['POST', 'GET'])#home page
 def home():
-    flash('Upload a .gpx file')
-    flash('It may take us a second to calucalte your route so please be patient')
+    flash('lets put some stuff here')
     if request.method == 'POST': # is activated when a file is uploaded
         if 'file' in request.files:
             file = request.files['file']
@@ -24,7 +23,7 @@ def home():
                 global filename
                 filename = secure_filename(file.filename) # security protocol
                 file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename)) # save uploaded file
-                return redirect(url_for('get_dir'))               
+                #return redirect(url_for('get_dir'))               
             else:
                 flash('Please Upload a .gpx type file')
     return render_template('home.html')
