@@ -3,3 +3,7 @@ Flask
 gpxpy
 pymongo
 Flask-PyMongo
+Flask-WTF
+WTForms
+passlib
+Flask-Login
