@@ -1,17 +1,20 @@
-# Calculate how much carbon is generated based on home energy usage
+# Calculate how much carbon is generated based on home energy usage in a year
+
+#Avg apartment size - 892 sq ft
+#Avg apartment bedroom size - 132 sq ft
+#Avg house bedroom size - 219 sq ft
 """
-time:
-    the time frame in which to calculate; we could also just calculate for a
-    fixed amount of time (day, month, or year)
 home_type:
     might be dorm, off-campus house, off-campus apartment
 home_size:
-    maybe a rough square footage
+    maybe a rough square footage or number of rooms
 heat_type:
     probably more relevant for off-campus housing
+roommate_n:
+    number of people they reside with
 """
-home_footprt(time, home_type, home_size, heat_type):
-    pass
+home_footprt(home_type, home_size, heat_type, roommate_n):
+
 
 if __name__ == '__main__':
     home_footprt()
