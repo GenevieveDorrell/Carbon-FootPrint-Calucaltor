@@ -8,7 +8,7 @@ mode:
 distance:
     the usual distance traveled, could allow them to input gps files
 """
-travel_footprt(time, mode, distance):
+def travel_footprt(time, mode, distance):
     pass
 
 if __name__ == '__main__':

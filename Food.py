@@ -7,7 +7,7 @@ diet_type:
     maybe of a few options such as vegan, vegetarian, etc. or we could do an
     option of how many times per week you eat meat
 """
-food_footprt(time, diet_type):
+def food_footprt(time, diet_type):
     pass
 
 if __name__ == '__main__':
