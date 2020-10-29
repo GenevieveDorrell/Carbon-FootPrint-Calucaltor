@@ -1,8 +1,8 @@
 import os
 from flask import Flask, render_template, request, flash, redirect, url_for
 from werkzeug.utils import secure_filename
-from gpx_parser import get_latlon
-from directions import get_directions
+
+
 
 UPLOAD_FOLDER = 'uploads'
 ALLOWED_EXTENSIONS = {'gpx'}
