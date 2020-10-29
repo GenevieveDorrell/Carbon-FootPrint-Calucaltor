@@ -21,6 +21,7 @@ def food_footprt(diet_type):
     return carbon
 
 if __name__ == '__main__':
+    # Unit tests
     carbon_v = food_footprt("vegan")
     print("vegan diet: " + str(carbon_v) + "lbs. of CO2/yr.")
 

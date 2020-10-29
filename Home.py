@@ -62,6 +62,7 @@ def home_footprt(home_type, room_n, roommate_n):
     return carbon
 
 if __name__ == '__main__':
+    # Unit tests
     carbon_h = home_footprt("off_house", 2, 1)
     print("2bd. 2pr. house:" + str(carbon_h) + "lbs. of CO2/yr.")
 
