@@ -62,11 +62,11 @@ def home_footprt(home_type, room_n, roommate_n):
     return carbon
 
 if __name__ == '__main__':
-    carbon = home_footprt("off_house", 2, 1)
-    print("2bd. 2pr. house:" + str(carbon) + "lbs. of CO2/yr.")
+    carbon_h = home_footprt("off_house", 2, 1)
+    print("2bd. 2pr. house:" + str(carbon_h) + "lbs. of CO2/yr.")
 
-    carbon = home_footprt("off_apartment", 2, 1)
-    print("2bd. 2pr. apartment:" + str(carbon) + "lbs. of CO2/yr.")
+    carbon_a = home_footprt("off_apartment", 2, 1)
+    print("2bd. 2pr. apartment:" + str(carbon_a) + "lbs. of CO2/yr.")
 
-    carbon = home_footprt("dorm", 1, 2)
-    print("1bd. 2pr. dorm: " + str(carbon) + "lbs. of CO2/yr.")
+    carbon_d = home_footprt("dorm", 1, 2)
+    print("1bd. 2pr. dorm: " + str(carbon_d) + "lbs. of CO2/yr.")
