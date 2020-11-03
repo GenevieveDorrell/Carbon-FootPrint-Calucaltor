@@ -1,8 +1,9 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
 <form method="post">
     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
 </form>
 <html>
-    <!--<head>
+    <head>
         {% if title %}
         <title>{{ title }} - Microblog</title>
         {% else %}
@@ -11,7 +12,6 @@
     </head>
     <body>
         <div>
-            Brevets:
             <a href="{{ url_for('home') }}">Home</a>
             <a href="{{ url_for('login') }}">Login</a>
             <a href="{{ url_for('logout') }}">Logout</a>
@@ -28,5 +28,5 @@
         {% endif %}
         {% endwith %}
         {% block content %}{% endblock %}
-    </body>-->
+    </body>
 </html>

@@ -1,4 +1,5 @@
-<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+{% extends "base.html" %}
+{% block content %}
 <html lang="en">
     <form method="post">
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
@@ -44,3 +45,4 @@
   </div>
 </body>
 </html>
+{% endblock %}

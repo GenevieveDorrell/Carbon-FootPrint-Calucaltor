@@ -2,7 +2,7 @@ import os
 from flask import Flask, render_template, request, flash, redirect, url_for
 from werkzeug.utils import secure_filename
 from pymongo import MongoClient
-import config
+#import config
 import logging
 from forms import LoginForm
 from flask_wtf.csrf import CSRFProtect
