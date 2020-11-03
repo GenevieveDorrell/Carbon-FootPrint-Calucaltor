@@ -4,9 +4,12 @@ BUS = 0.28 # Assumes half full bus on average
 # Calculate how much carbon is generated based on commuting and travel costs
 """
 mode:
-    the primary type of travel (car, bike, plane, bus)
+    car
+    bike
+    walk
+    bus
 distance:
-    the usual distance traveled to get to campus every day
+    the usual distance traveled to get to campus every day integer >=0
 """
 
 def travel_footprt(mode, distance):

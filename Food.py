@@ -1,8 +1,11 @@
 # Calculate how much carbon is generated based on food consumption
 """
 diet_type:
-    maybe of a few options such as vegan, vegetarian, etc. or we could do an
-    option of how many times per week you eat meat
+    vegan
+    vegetarian
+    white_meat_only
+    med_meat
+    high_meat
 """
 
 def food_footprt(diet_type):

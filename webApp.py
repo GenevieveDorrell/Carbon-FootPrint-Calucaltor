@@ -10,7 +10,7 @@ from flask_wtf.csrf import CSRFProtect
 from testToken import generate_auth_token, verify_auth_token
 from password import hash_password, verify_password
 from flask_login import (LoginManager, current_user, login_required,
-                            login_user, logout_user, UserMixin, 
+                            login_user, logout_user, UserMixin,
                             confirm_login, fresh_login_required)
 
 
@@ -44,7 +44,7 @@ login_manager.login_view = "login"
 login_manager.login_message = u"Please log in to access this page."
 login_manager.refresh_view = "reauth"
 
-# step 2 in slides 
+# step 2 in slides
 @login_manager.user_loader
 def load_user(user_id):
     dbuserOBj = Userdb.todouserdb.find_one({"id": user_id})
@@ -62,22 +62,22 @@ class User(UserMixin):
 
     def is_active(self):
         return True
-    
+
     def get_id(self):
         return self.id
 
     def is_authenticated(self):
         return True
-    
+
     def has_valid_token(self):
         dbuser = Userdb.todouserdb.find_one({"id": self.id})
         if verify_auth_token(dbuser['token']) == 'Success':
             return True
         else:
             return False
-    
+
     def is_anonymous(self):
-        return False       
+        return False
 
 #end of paste setup
 
@@ -90,15 +90,15 @@ def reset():
 #begining of paste
 
 @app.route('/register', methods=['POST', 'GET'])
-def register():   
+def register():
     form = LoginForm()
     user = form.username.data
-    app.logger.debug("user: {}".format(user))   
+    app.logger.debug("user: {}".format(user))
     if form.validate_on_submit():
         if Userdb.todouserdb.find({"username": user},{}).count() == 0:
             pas = hash_password(form.password.data)
             id = Userdb.todouserdb.count({})
-            item_doc = { 
+            item_doc = {
                         'id' : id,
                         'username': user,
                         'password': pas,
@@ -168,7 +168,7 @@ def home():
                 global filename
                 filename = secure_filename(file.filename) # security protocol
                 file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename)) # save uploaded file
-                #return redirect(url_for('get_dir'))               
+                #return redirect(url_for('get_dir'))
             else:
                 flash('Please Upload a .gpx type file')
     return render_template('home.html')
