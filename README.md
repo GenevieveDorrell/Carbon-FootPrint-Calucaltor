@@ -44,3 +44,12 @@ You must have python and pip preinstalled on your computer for the build scripts
 -Contians .gpx files that you can use to test your setup.
 
 ## Acknowledgments-
+The electricity and carbon estimations based on certain activities were based on the following sources:
+
+April 5, 2. (2019, November 19). Does Bus Transit Reduce Greenhouse Gas Emissions? Retrieved November 04, 2020, from https://reason.org/commentary/does-bus-transit-reduce-greenhouse/
+
+The carbon foodprint of 5 diets compared. (n.d.). Retrieved November 04, 2020, from http://shrinkthatfootprint.com/food-carbon-footprint-diet
+
+Frequently Asked Questions (FAQs) - U.S. Energy Information Administration (EIA). (n.d.). Retrieved November 04, 2020, from https://www.eia.gov/tools/faqs/faq.php?id=74
+
+How Much Electricity on Average Do Homes in Your State Use? (Ranked by State). (n.d.). Retrieved November 04, 2020, from https://www.electricchoice.com/blog/electricity-on-average-do-homes/
