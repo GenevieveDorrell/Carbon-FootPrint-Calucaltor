@@ -5,7 +5,7 @@ AVG_CARBON = 5000
 
 def avg_carbon(usr_carbon):
 
-    plt.figure(figsize=(2,4))
+    plt.figure(figsize=(4,6))
     plt.axhline(y = AVG_CARBON, color = 'r', linestyle='--', linewidth=2)
     plt.axhline(y = usr_carbon, color = 'b', linestyle='-', linewidth=3)
 
@@ -18,11 +18,11 @@ def avg_carbon(usr_carbon):
     )
     #plt.title("How you compare against the average college student")
     plt.ylabel("lbs. of CO2 per year")
-    
+
     path = "figures/avg_carbon"
-    plt.savefig(path, bbox_inches='tight')
+    plt.savefig(path, bbox_inches='tight', transparent=True)
     plt.show()
-    
+
 
 
 if __name__ == '__main__':
