@@ -7,3 +7,4 @@ Flask-WTF
 WTForms
 passlib
 Flask-Login
+matplotlib
