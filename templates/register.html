@@ -2,7 +2,18 @@
 {% block content %}
 <!-- Our own style sheet -->
 <link rel="stylesheet" href="/static/css/home.css" />
-    <h1>enter your desired username and password</h1>
+<div align="center">
+    <h2>enter your desired username and password</h2>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          <ul class=flashes>
+          {% for message in messages %}
+            <p>{{ message }}</p>
+          {% endfor %}
+          </ul>
+        {% endif %}
+      {% endwith %}
+      {% block body %}{% endblock %}
     <form action="" method="post" novalidate>
         {{ form.hidden_tag() }}
         <p>
@@ -16,9 +27,10 @@
             {{ form.password.label }}<br>
             {{ form.password(size=32) }}<br>
             {% for error in form.password.errors %}
-            <span style="color: red;">[{{ error }}]</span>
+            <span style="color: red;">{{ error }}</span>
             {% endfor %}
         </p>
-        <p>{{ form.register() }}</p>
+        <p id="user_button">{{ form.register() }}</p>
     </form>
+</div>
 {% endblock %}

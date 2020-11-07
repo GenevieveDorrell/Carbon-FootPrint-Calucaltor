@@ -2,16 +2,17 @@ import os
 from flask import Flask, render_template, request, flash, redirect, url_for
 from werkzeug.utils import secure_filename
 from pymongo import MongoClient
-#import config
 import logging
-from forms import LoginForm
+from forms import LoginForm, CarbonFootprint
 from flask_wtf.csrf import CSRFProtect
-#from flask_restful import reqparse
 from testToken import generate_auth_token, verify_auth_token
 from password import hash_password, verify_password
 from flask_login import (LoginManager, current_user, login_required,
                             login_user, logout_user, UserMixin,
-                            confirm_login, fresh_login_required)
+                            confirm_login, fresh_login_required, user_is_authenticated)
+from Food import food_footprt
+from Home import home_footprt
+from Travel import travel_footprt
 
 
 
@@ -27,24 +28,17 @@ app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 csrf.init_app(app)
 
 
-#CONFIG = config.configuration()
-
-#app.secret_key = CONFIG.SECRET_KEY
-#api = Api(app) #make api
 client = MongoClient('mongodb://localhost:27017/data')
-db = client.tododb
 Userdb = client.todouserdb
 
-# step 1 in slides
+
 login_manager = LoginManager()
 login_manager.setup_app(app)
 
-# step 6 in the slides
 login_manager.login_view = "login"
 login_manager.login_message = u"Please log in to access this page."
 login_manager.refresh_view = "reauth"
 
-# step 2 in slides
 @login_manager.user_loader
 def load_user(user_id):
     dbuserOBj = Userdb.todouserdb.find_one({"id": user_id})
@@ -79,39 +73,25 @@ class User(UserMixin):
     def is_anonymous(self):
         return False
 
-#end of paste setup
-
-@app.route('/reset', methods=['GET', 'POST'])
-@login_required
-@csrf.exempt
-def reset():
-    db.tododb.drop()
-    return redirect('/')
-#begining of paste
-
 @app.route('/register', methods=['POST', 'GET'])
 def register():
     form = LoginForm()
     user = form.username.data
-    app.logger.debug("user: {}".format(user))
-    if form.validate_on_submit():
-        if Userdb.todouserdb.find({"username": user},{}).count() == 0:
-            pas = hash_password(form.password.data)
-            id = Userdb.todouserdb.count({})
+    if form.validate_on_submit(): #check if form is filled out and submited
+        if Userdb.todouserdb.find({"username": user},{}).count() == 0: #check to see if the username is in use
+            pas = hash_password(form.password.data)#hash password
+            id = Userdb.todouserdb.count({})#create user
             item_doc = {
                         'id' : id,
                         'username': user,
                         'password': pas,
-                        'token': ''
+                        'token': '',
+                        'Carbon': {}
                     }
-            Userdb.todouserdb.insert_one(item_doc)
-            one = Userdb.todouserdb.find_one({"username": user})
-            app.logger.debug("userob: {}".format(one['id']))
+            Userdb.todouserdb.insert_one(item_doc)#add user to userdb
             return redirect(url_for("login"))
         else:
             flash("that username is already taken")
-    one = Userdb.todouserdb.find_one({"username": user})
-    app.logger.debug("userob: {}".format(one))
     return render_template('register.html',  title='Register', form=form)
 # step 3 in slides
 
@@ -119,13 +99,13 @@ def register():
 @app.route("/login", methods=["GET", "POST"])
 def login():
     form = LoginForm()
-    if form.validate_on_submit():
+    if form.validate_on_submit(): #check if form is filled out and submited
         # Login and validate the user.
         # user should be an instance of your `User` class
-        username = form.username.data
-        if Userdb.todouserdb.find({"username": username}).count() == 1:
+        username = form.username.data # get username from form
+        if Userdb.todouserdb.find({"username": username}).count() == 1: #check if the usermane in the db
             dbuser = Userdb.todouserdb.find_one({"username": username})
-            if verify_password(form.password.data, dbuser['password']):
+            if verify_password(form.password.data, dbuser['password']): #check agianst hashed pass
                 user = User(username,dbuser['id'])
                 login_user(user, form.remember_me.data)
                 token = generate_auth_token()
@@ -158,35 +138,13 @@ def logout():
 #end of paste
 
 @app.route('/', methods=['POST', 'GET'])#home page
-@login_required
 def home():
-    flash('lets put some stuff here')
-    if request.method == 'POST': # is activated when a file is uploaded
-        if 'file' in request.files:
-            file = request.files['file']
-            if file and allowed_file(file.filename):
-                global filename
-                filename = secure_filename(file.filename) # security protocol
-                file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename)) # save uploaded file
-                #return redirect(url_for('get_dir'))
-            else:
-                flash('Please Upload a .gpx type file')
-    return render_template('home.html')
-
-@app.route('/directions', methods=['POST', 'GET'])#home page
-def get_dir():
-    flash('we are working on your route please give us a second :)')
-    try:
-        latlon = get_latlon((UPLOAD_FOLDER + "/" + filename)) # parse file
-        flash('okay here are your directions happy travels')
-        directionsList = get_directions(latlon) # calcualte directions
-        for direction in directionsList:
-            flash(direction) #display directions
-        os.remove((UPLOAD_FOLDER + "/" + filename)) # remove uploaded file
-    except:
-        flash("Opps something went wrong no uploaded file was found")
-    return render_template('directions.html')
-
-def allowed_file(filename): #checks if it is the correct file type
-    return '.' in filename and \
-           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+    form = CarbonFootprint()
+    print
+    if form.validate_on_submit(): #check if form is filled out and submited
+        footprint = food_footprt(form.food.data) + home_footprt(form.housing.data, 
+        form.numRooms.data, form.numRoomates.data) + travel_footprt(form.travel_method.data, form.distance.data)
+        flash('you carbon foot print is '+ str(footprint) + ' lbs. of CO2/yr.')
+    
+    
+    return render_template('home.html', title = 'Home', form = form)

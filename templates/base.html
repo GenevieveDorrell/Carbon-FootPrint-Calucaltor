@@ -10,23 +10,34 @@
         <title>Welcome to Microblog</title>
         {% endif %}
     </head>
-    <body>
-        <div>
-            <a href="{{ url_for('home') }}">Home</a>
-            <a href="{{ url_for('login') }}">Login</a>
-            <a href="{{ url_for('logout') }}">Logout</a>
-            <a href="{{ url_for('register') }}">Register as new user</a>
+    <body>        
+        <div id="header">
+            <h1>Carbon Footprint Calculator</h1>
+            <script>
+                var page = window.location.href.split("?")[0].split("/")
+                var title 
+                var link
+                if (page[page.length-1] == "login") {
+                    title = "Register as new User"
+                    link = "{{ url_for('register') }}"
+                } else if(page[page.length-1] == "register") {
+                    title = "Login"
+                    link = "{{ url_for('login') }}"
+                } else {
+                    title = "Logout"
+                    link = "{{ url_for('logout') }}"
+                }
+                var a = document.createElement('a');
+                var linkText = document.createTextNode(title);
+                a.appendChild(linkText);
+                a.title = title;
+                a.href = link;
+                document.body.appendChild(a);
+              </script>            
         </div>
-        <hr>
-        {% with messages = get_flashed_messages() %}
-        {% if messages %}
-        <ul>
-            {% for message in messages %}
-            <p style="color:red;" class="message">{{ message }}</p>
-            {% endfor %}
-        </ul>
-        {% endif %}
-        {% endwith %}
         {% block content %}{% endblock %}
+        <div id=footer align="center">
+            <p>by Genevieve and Jacob</p>
+        </div>
     </body>
-</html>
+<html>
