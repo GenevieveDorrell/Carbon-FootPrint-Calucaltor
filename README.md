@@ -52,4 +52,8 @@ The carbon foodprint of 5 diets compared. (n.d.). Retrieved November 04, 2020, f
 
 Frequently Asked Questions (FAQs) - U.S. Energy Information Administration (EIA). (n.d.). Retrieved November 04, 2020, from https://www.eia.gov/tools/faqs/faq.php?id=74
 
+How Clean is Your Electric Vehicle? (n.d.). Retrieved November 07, 2020, from https://evtool.ucsusa.org/
+
 How Much Electricity on Average Do Homes in Your State Use? (Ranked by State). (n.d.). Retrieved November 04, 2020, from https://www.electricchoice.com/blog/electricity-on-average-do-homes/
+
+
