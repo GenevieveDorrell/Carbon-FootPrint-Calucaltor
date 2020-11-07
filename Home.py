@@ -61,15 +61,15 @@ def home_footprt(home_type, room_n, roommate_n):
 
     # Pounds CO2 per average kWh generated
     carbon = 0.99 * energy
-    return carbon
+    return round(carbon, 2)
 
 if __name__ == '__main__':
     # Unit tests
     carbon_h = home_footprt("off_house", 2, 1)
-    print("2bd. 2pr. house:" + str(carbon_h) + "lbs. of CO2/yr.")
+    print("2bd. 2pr. house: " + str(carbon_h) + "lbs. of CO2/yr.")
 
     carbon_a = home_footprt("off_apartment", 2, 1)
-    print("2bd. 2pr. apartment:" + str(carbon_a) + "lbs. of CO2/yr.")
+    print("2bd. 2pr. apartment: " + str(carbon_a) + "lbs. of CO2/yr.")
 
     carbon_d = home_footprt("dorm", 1, 2)
     print("1bd. 2pr. dorm: " + str(carbon_d) + "lbs. of CO2/yr.")

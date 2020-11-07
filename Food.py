@@ -21,7 +21,7 @@ def food_footprt(diet_type):
     elif diet_type == "high_meat":
         carbon = 3.3 * 2000
 
-    return carbon
+    return round(carbon, 2)
 
 if __name__ == '__main__':
     # Unit tests
