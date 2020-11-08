@@ -5,6 +5,7 @@ According to the [New York Times](https://www.nytimes.com/guides/year-of-living-
 
 ## Setup-
 First have mongo DB installed on your computer or server. If you need to install it a free community version is avialable [here](https://www.mongodb.com/try/download/community).
+
 **Windows**
 1. Run the windowBuild.bat ('.\windowBuild.bat') to build a virtual environment and start running the program
 Note: To call run.cmd alone you must be in the virtual environment. 
