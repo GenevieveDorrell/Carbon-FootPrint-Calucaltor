@@ -23,9 +23,16 @@ TODO
 
 ## Requirements-
 You must have python and pip preinstalled on your computer for the build scripts to work. Our web aplication will then build the virtual environment and install these third party packages within the environment. 
-- gpxpy
+- geopy
 - Flask
-
+- gpxpy
+- pymongo
+- Flask-PyMongo
+- Flask-WTF
+- WTForms
+- passlib
+- Flask-Login
+- matplotlib
 
 ## Files & Directories-
 
