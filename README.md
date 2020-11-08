@@ -64,4 +64,6 @@ How Clean is Your Electric Vehicle? (n.d.). Retrieved November 07, 2020, from ht
 
 How Much Electricity on Average Do Homes in Your State Use? (Ranked by State). (n.d.). Retrieved November 04, 2020, from https://www.electricchoice.com/blog/electricity-on-average-do-homes/
 
+Pearce, F. (2019, May 23). In store or online - what's the environmentally friendliest way to shop? Retrieved November 08, 2020, from https://ensia.com/features/environmental-cost-online-shopping-delivery/
+
 
