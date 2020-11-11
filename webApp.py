@@ -176,18 +176,7 @@ def account():
                                                                             'diet': diet,
                                                                             'numRooms': numRooms,
                                                                             'travel_mode': travel_mode,
-                                                                            'commute': commute}})
-                                                                   #"$set": {'numRooms': numRooms},
-                                                                   #"$set": {'diet': diet},
-                                                                   #"$set": {'numRooms': numRooms},
-                                                                   #"$set": {'numRoomates': numRoomates},
-                                                                   #"$set": {'travel_mode': travel_mode},
-                                                                   #"$set": {'commute': commute}})
-                                                                   #"$addToSet": {'footprint': [footprint, str(date.today())]}
-                                                                   #"$set":{'numRooms': numRooms}
-                                                                   #"$addToSet":{'dates': date.today.strftime("%d/%m/%Y")}
-                                                                   #"$addToSet":{'footprint': (footprint, date.today.strftime("%d/%m/%Y"))}})
-            #dbObj = load_user(current_user.id)
+                                                                            'commute': commute}})                                                       
             data = Userdb.todouserdb.find_one({'id': current_user.id})
             try:
                 FootprintList = data['footprint']
