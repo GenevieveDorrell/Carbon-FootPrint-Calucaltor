@@ -13,7 +13,7 @@ class LoginForm(FlaskForm):
 class CarbonFootprint(FlaskForm):
     food = SelectField('Diet prefrence', choices=[('vegan', 'vegan'), ('vegetarian', 'vegetarian'),
      ('white_meat_only', 'white meat only'), ('med_meat', 'medium meat'), ('high_meat', 'high meat')])
-    travel_method = SelectField('Mode of transproation', choices=[('car'),('bus'),('bike'),('walk')])
+    travel_method = SelectField('Mode of transproation', choices=[('gcar','Gas Car'),('hcar', 'hybrid car'),('bus', 'bus'),('non_motor', 'walk or bike')])
     distance = IntegerField('Distance traveled', validators=[DataRequired()])
     housing = SelectField('Housing', choices=[('dorm', 'dorm'),('off_apartment','apartment'),('off_house','house')])
     numRooms = IntegerField('Number of Rooms', validators=[DataRequired()])
