@@ -19,3 +19,4 @@ class CarbonFootprint(FlaskForm):
     numRooms = IntegerField('Number of Rooms', validators=[DataRequired()])
     numRoomates = IntegerField('Number of Roomates', validators=[DataRequired()])
     submit = SubmitField('Calcualte Carbon Footprint')
+    delet = SubmitField('delete acount')
