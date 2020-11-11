@@ -142,9 +142,9 @@ def home():
     form = CarbonFootprint()
     print
     if form.validate_on_submit(): #check if form is filled out and submited
-        footprint = food_footprt(form.food.data) + home_footprt(form.housing.data, 
+        footprint = food_footprt(form.food.data) + home_footprt(form.housing.data,
         form.numRooms.data, form.numRoomates.data) + travel_footprt(form.travel_method.data, form.distance.data)
         flash('you carbon foot print is '+ str(footprint) + ' lbs. of CO2/yr.')
-    
-    
+
+
     return render_template('home.html', title = 'Home', form = form)
