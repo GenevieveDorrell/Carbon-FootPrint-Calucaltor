@@ -155,7 +155,7 @@ def home():
         footprint = food_footprt(diet) + home_footprt(housing,
         numRooms, numRoomates) + travel_footprt(travel_mode, commute)
         flash('your carbon foot print is '+ str(footprint) + ' lbs. of CO2/yr.')
-    return render_template('home.html', title = 'Home', form = form, loggedin = loggedin)
+    return render_template('home.html', title = 'Home', form = form)
 
 @app.route('/account', methods=['POST', 'GET'])#home page
 @login_required

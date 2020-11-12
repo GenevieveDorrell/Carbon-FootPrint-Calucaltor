@@ -10,6 +10,7 @@ class LoginForm(FlaskForm):
     submit = SubmitField('sign in')
     register = SubmitField('create account')
 
+
 class CarbonFootprint(FlaskForm):
     food = SelectField('Diet', choices=[('vegan', 'vegan'), ('vegetarian', 'vegetarian'),
      ('white_meat_only', 'white meat only'), ('med_meat', 'medium meat'), ('high_meat', 'high meat')])
@@ -18,6 +19,11 @@ class CarbonFootprint(FlaskForm):
     housing = SelectField('Housing', choices=[('dorm', 'dorm'),('off_apartment','apartment'),('off_house','house')])
     numRooms = IntegerField('Rooms', validators=[DataRequired()])
     numRoomates = IntegerField('Roomates', validators=[DataRequired()])
+    numPackages = IntegerField('Number of Packages', validators=[DataRequired()])
     track_submit = SubmitField('Track Carbon Footprint')
     submit = SubmitField('Calculate Carbon Footprint')
     delete = SubmitField('Delete Acount')
+    fast_delivery = BooleanField("Fast delivery")
+    packages = IntegerField('number of packages ordered per month', validators=[DataRequired()])
+    used_clothing = IntegerField('Percent of Wardrobe bought used', validators=[DataRequired()])#add min and max
+    clothing_purchased = IntegerField('number of clothing items perchased per month', validators=[DataRequired()])

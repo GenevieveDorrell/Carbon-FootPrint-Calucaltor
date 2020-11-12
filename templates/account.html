@@ -31,6 +31,14 @@
         {{ form.numRooms(class_="form-style-username",placeholder="enter number of rooms") }}</p>
         <p class="label">{{ form.numRoomates.label }}<br>
         {{ form.numRoomates(class_="form-style-username",placeholder="enter number of roomates") }}</p>
+        <p class="label">{{ form.packages.label }}<br>
+        {{ form.packages(class_="form-style-username",placeholder="packages ordered per month") }}</p>
+        <p class="label">{{ form.fast_delivery.label }}<br>
+        {{ form.fast_delivery(class_="form-bool") }}</p>
+        <p class="label">{{ form.used_clothing.label }}<br>
+        {{ form.used_clothing(class_="form-style-username",placeholder="% wardrobe bouught used") }}</p>
+        <p class="label">{{ form.clothing_purchased.label }}<br>
+        {{ form.clothing_purchased(class_="form-style-username",placeholder="ammount of clothes bought each month") }}</p>
         <p class="label">{{ form.track_submit(class_="form-button") }}</p>
         <p class="label">{{ form.delete(class_="form-button") }}</p>
       </form>
