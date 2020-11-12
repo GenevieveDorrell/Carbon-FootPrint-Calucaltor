@@ -10,13 +10,15 @@ APARTMENT = 600
 # Making assumptions on room/house size and heating type, since many college students don't know this
 """
 home_type:
-    dorm
-    off_apartment
-    off_house
+    'dorm'
+    'off_apartment'
+    'off_house'
 room_n:
-    number of BEDROOMS integer >=0
+    number of BEDROOMS
+    integer >=0
 roommate_n:
-    number of people they reside with integer >=0
+    number of people they reside with
+    integer >=0
 """
 def home_footprt(home_type, room_n, roommate_n):
     carbon = 0
