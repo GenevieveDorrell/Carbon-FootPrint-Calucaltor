@@ -16,22 +16,22 @@
 </head>
 
 <body>     
-    <div align="center"> 
+    <div id = 'main'> 
       <form action="" method="post" novalidate>
         {{ form.hidden_tag() }}
-        <p>{{ form.food.label }}<br>
-        {{ form.food() }}</p>
-        <p>{{ form.travel_method.label }}<br>
-        {{ form.travel_method() }}</p>
-        <p>{{ form.distance.label }}<br>
-        {{ form.distance() }}</p>
-        <p>{{ form.housing.label }}<br>
-        {{ form.housing() }}</p>
-        <p>{{ form.numRooms.label }}<br>
-        {{ form.numRooms() }}</p>
-        <p>{{ form.numRoomates.label }}<br>
-        {{ form.numRoomates() }}</p>
-        <p>{{ form.submit() }}</p>
+        <p class="label">{{ form.food.label }}<br>
+        {{ form.food(class_="form-drop-down") }}</p>
+        <p class="label">{{ form.travel_method.label }}<br>
+        {{ form.travel_method(class_="form-drop-down") }}</p>
+        <p class="label">{{ form.distance.label }}<br>
+        {{ form.distance(class_="form-style-username",placeholder="distance in miles") }}</p>
+        <p class="label">{{ form.housing.label }}<br>
+        {{ form.housing(class_="form-drop-down") }}</p>
+        <p class="label">{{ form.numRooms.label }}<br>
+        {{ form.numRooms(class_="form-style-username",placeholder="enter number of rooms") }}</p>
+        <p class="label">{{ form.numRoomates.label }}<br>
+        {{ form.numRoomates(class_="form-style-username",placeholder="enter number of roomates") }}</p>
+        <p class="label">{{ form.submit(class_="form-button") }}</p>
       </form>
       {% with messages = get_flashed_messages() %}
         {% if messages %}

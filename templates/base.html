@@ -3,17 +3,17 @@
     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
 </form>
 <html>
-    <head>
+    <!--<head>
         {% if title %}
         <title>{{ title }} - Microblog</title>
         {% else %}
         <title>Welcome to Microblog</title>
         {% endif %}
-    </head>
+    </head>-->
     <body>        
         <div id="header">
-            <h1>Carbon Footprint Calculator</h1>
-            <script>
+            <h1>Carbon Footprint Tracker</h1>
+            <!--<script>
                 var page = window.location.href.split("?")[0].split("/")
                 var title 
                 var link
@@ -32,12 +32,29 @@
                 a.appendChild(linkText);
                 a.title = title;
                 a.href = link;
-                document.body.appendChild(a);
-              </script>            
+                document.getElementById("header").appendChild(a);
+              </script>-->  
         </div>
+        <div class="tabs">
+        <p>
+        <form method="get" action="/about">
+            <button class='tab' type="submit">About</button>
+        </form>
+        <form method="get" action="/account">
+            <button class='tab' type="submit">My stats</button>
+        </form>
+        <form method="get" action="/">
+            <button class='tab' type="submit">Carbon Calculator</button>
+        </form></p>
+        </div>          
         {% block content %}{% endblock %}
-        <div id=footer align="center">
+        <div id=footer>
             <p>by Genevieve and Jacob</p>
+            <p>
+                <a class="logo" href="https://github.com/GenevieveDorrell/Carbon-FootPrint-Calucaltor" target="_blank">
+                    <img src="static\resources\GitHub-Mark\PNG\GitHub-Mark-Light-64px.png" alt="github" width="30" height="30">
+                </a>
+            </p>
         </div>
     </body>
 <html>

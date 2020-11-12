@@ -99,6 +99,8 @@ def register():
 @app.route("/login", methods=["GET", "POST"])
 def login():
     form = LoginForm()
+    if form.register.data:
+            return redirect(url_for("register"))
     if form.validate_on_submit(): #check if form is filled out and submited
         # Login and validate the user.
         # user should be an instance of your `User` class
@@ -110,7 +112,7 @@ def login():
                 login_user(user, form.remember_me.data)
                 token = generate_auth_token()
                 Userdb.todouserdb.update_one(dbuser, {'$set': {'token': token}})
-                flash('Logged in successfully.')
+                #flash('Logged in successfully.')
                 return redirect('/')
             else:
                 flash('incorrect Password.')
@@ -118,8 +120,6 @@ def login():
             flash('unregistered user')
     return render_template('login.html',  title='Sign In', form=form)
 
-
-# step 5 in slides
 @app.route("/reauth", methods=["GET", "POST"])
 @login_required
 def reauth():
@@ -135,12 +135,15 @@ def logout():
     logout_user()
     flash("Logged out.")
     return redirect(url_for("login"))
+
+@app.route("/about")
+def about():
+    return render_template('about.html',loggedin = current_user.is_active)
 #end of paste
 
 @app.route('/', methods=['POST', 'GET'])#home page
 @login_required
-def home():
-    loggedin = current_user.is_active
+def home():    
     form = CarbonFootprint()
     if form.validate_on_submit(): #check if form is filled out and submited
         diet = form.food.data
@@ -152,17 +155,17 @@ def home():
         footprint = food_footprt(diet) + home_footprt(housing, 
         numRooms, numRoomates) + travel_footprt(travel_mode, commute)
         flash('you carbon foot print is '+ str(footprint) + ' lbs. of CO2/yr.')   
-    return render_template('home.html', title = 'Home', form = form, loggedin = loggedin)
+    return render_template('home.html', title = 'Home', form = form,loggedin = current_user.is_active)
 
 @app.route('/account', methods=['POST', 'GET'])#home page
 @login_required
 def account():
-    form = CarbonFootprint()
-    if form.delet.data:
+    form = CarbonFootprint()    
+    if form.delete.data:
             Userdb.todouserdb.delete_one({'id': current_user.id})
             return redirect(url_for("logout"))
     if form.validate_on_submit(): #check if form is filled out and submited        
-        diet = form.food.data
+        diet = form.food.data#get data from form
         housing = form.housing.data
         numRooms = form.numRooms.data
         numRoomates = form.numRoomates.data
@@ -170,27 +173,30 @@ def account():
         commute = form.distance.data
         footprint = food_footprt(diet) + home_footprt(housing, 
         numRooms, numRoomates) + travel_footprt(travel_mode, commute)
-        if current_user.is_active:
+        if current_user.is_active:#update user carbon use variable in databse
             Userdb.todouserdb.update_one({'id': current_user.id}, {"$set": {'housing': housing,
                                                                             'numRooms': numRooms,
                                                                             'diet': diet,
-                                                                            'numRooms': numRooms,
+                                                                            'numRoomates': numRoomates,
                                                                             'travel_mode': travel_mode,
                                                                             'commute': commute}})                                                       
             data = Userdb.todouserdb.find_one({'id': current_user.id})
-            try:
+            if 'footprint' in data:#make sure only one carbon input per day is calculated
                 FootprintList = data['footprint']
                 if FootprintList[len(FootprintList)-1][1] == str(date.today()):
                     FootprintList[len(FootprintList)-1][0] = footprint
                     Userdb.todouserdb.update_one({'id': current_user.id}, {"$set": {'footprint': FootprintList}})
                 else:
                     Userdb.todouserdb.update_one({'id': current_user.id}, {"$addToSet": {'footprint': [footprint, str(date.today())]}})
-            except:
+            else:
                 Userdb.todouserdb.update_one({'id': current_user.id}, {"$addToSet": {'footprint': [footprint, str(date.today())]}})
-            print(data)
-            print(data['commute'])
-            print(current_user.id)
-            print(current_user.name)
-            print()
-        flash('you carbon foot print is '+ str(footprint) + ' lbs. of CO2/yr.')   
-    return render_template('account.html', title = 'Home', form = form)
+        flash('you carbon foot print is '+ str(footprint) + ' lbs. of CO2/yr.')
+    data = Userdb.todouserdb.find_one({'id': current_user.id})#looks up the user in db
+    if 'footprint' in data:#prefill form with users last entry
+        form.numRooms.data = data['numRooms']#
+        form.housing.data = data['housing']
+        form.numRoomates.data = data['numRoomates']
+        form.travel_method.data = data['travel_mode']
+        form.distance.data = data['commute']
+        form.food.data = data['diet']  
+    return render_template('account.html', title = 'Home', form = form,)

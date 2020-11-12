@@ -2,9 +2,23 @@
 {% block content %}
 <!-- Our own style sheet -->
 <link rel="stylesheet" href="/static/css/home.css" />
-<div align="center">
-    <h2>enter your desired username and password</h2>
-    {% with messages = get_flashed_messages() %}
+<div id = 'main'>
+    <h2>enter a username and password</h2>    
+    <form action="" method="post" novalidate>
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.username(size=32, class_="form-style-username",placeholder="Username") }}<br>
+            {% for error in form.username.errors %}
+            <span style="color: white;">{{ error }}</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.password(size=32, class_="form-style-username",placeholder="Password") }}<br>
+            {% for error in form.password.errors %}
+            <span style="color: white;">{{ error }}</span>
+            {% endfor %}
+        </p>
+        {% with messages = get_flashed_messages() %}
         {% if messages %}
           <ul class=flashes>
           {% for message in messages %}
@@ -14,23 +28,7 @@
         {% endif %}
       {% endwith %}
       {% block body %}{% endblock %}
-    <form action="" method="post" novalidate>
-        {{ form.hidden_tag() }}
-        <p>
-            {{ form.username.label }}<br>
-            {{ form.username(size=32) }}<br>
-            {% for error in form.username.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
-        </p>
-        <p>
-            {{ form.password.label }}<br>
-            {{ form.password(size=32) }}<br>
-            {% for error in form.password.errors %}
-            <span style="color: red;">{{ error }}</span>
-            {% endfor %}
-        </p>
-        <p id="user_button">{{ form.register() }}</p>
+        <p>{{ form.register(class_="form-button") }}</p>
     </form>
 </div>
 {% endblock %}

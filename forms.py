@@ -7,16 +7,17 @@ class LoginForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
     password = PasswordField('Password', validators=[DataRequired()])
     remember_me = BooleanField('Remember Me')
-    submit = SubmitField('Sign In')
-    register = SubmitField('Register')
+    submit = SubmitField('sign in')
+    register = SubmitField('create account')
 
 class CarbonFootprint(FlaskForm):
-    food = SelectField('Diet prefrence', choices=[('vegan', 'vegan'), ('vegetarian', 'vegetarian'),
+    food = SelectField('Diet', choices=[('vegan', 'vegan'), ('vegetarian', 'vegetarian'),
      ('white_meat_only', 'white meat only'), ('med_meat', 'medium meat'), ('high_meat', 'high meat')])
-    travel_method = SelectField('Mode of transproation', choices=[('gcar','Gas Car'),('hcar', 'hybrid car'),('bus', 'bus'),('non_motor', 'walk or bike')])
-    distance = IntegerField('Distance traveled', validators=[DataRequired()])
+    travel_method = SelectField('Transproation', choices=[('gcar','gas car'),('hcar', 'hybrid car'),('bus', 'bus'),('non_motor', 'walk or bike')])
+    distance = IntegerField('Daily Commute', validators=[DataRequired()])
     housing = SelectField('Housing', choices=[('dorm', 'dorm'),('off_apartment','apartment'),('off_house','house')])
-    numRooms = IntegerField('Number of Rooms', validators=[DataRequired()])
-    numRoomates = IntegerField('Number of Roomates', validators=[DataRequired()])
-    submit = SubmitField('Calcualte Carbon Footprint')
-    delet = SubmitField('delete acount')
+    numRooms = IntegerField('Rooms', validators=[DataRequired()])
+    numRoomates = IntegerField('Roomates', validators=[DataRequired()])
+    track_submit = SubmitField('Track Carbon Footprint')
+    submit = SubmitField('Calculate Carbon Footprint')
+    delete = SubmitField('Delete Acount')

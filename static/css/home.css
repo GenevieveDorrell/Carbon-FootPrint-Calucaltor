@@ -1,66 +1,134 @@
 body {
-    background-color: honeydew;
+    background-color: #8bc99c;
     font-family: Verdana, Geneva, sans-serif;
+    overflow: hidden;
+    width: 100%;
+    margin:0;
+    padding:0;
+    height: 100%;
   }
   
   h1 {
     color: white;
     text-align: center;
+    font-weight: 100;
+  }
+  h2 {
+    color: white;
+    text-align: center;
+    font-weight: 100; 
+    padding: 14px 16px;
+
   }
   #header {
-    background-color: lightgreen;
+    background-color: #5d916b;
+    position: absolute;
+    width: 100%;
+    margin:0;
+    padding:0;
+    height: 75px;
   }
-  button {
-    background-color: darkgreen;
-    border: none;
-    color: white;
-    padding: 15px 32px;
+  #main {
+    /* Provide scrollbars if needed, position below header, and derive height from top/bottom */
+    overflow: auto;
+    position: absolute;
+    width: 100%;
+    top: 150px;
+    bottom: 0;
     text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 18px;
-    border-radius: 12px;
-    /*font-family: "Lucida Console", Courier, monospace;*/
-  }
-  /* Style the tab */
+    bottom: 100px;
+}
+#footer {
+  background-color: #5d916b;
+  overflow: auto;
+  position: absolute;
+  color: white;
+  width: 100%;
+  bottom: 0;
+  height: 100px;
+  text-align: center;
+}
+.tabs{
+  width: 100%;
+  top: 75px;
+  background-color: #5d916b;
+  position: absolute;
+  padding:0;
+
+}
 .tab {
   overflow: hidden;
-  border: 1px solid #ccc;
-  background-color: #f1f1f1;
+  border: none;
+  padding: 14px 16px;
+  outline: none;
+  background-color:#5d916b;
+  font-size: 18px;
+  font-weight: 200;
+  bottom: 0;
+  color: white;
+  float: left;  
 }
 
-/* Style the buttons that are used to open the tab content */
-.tab button {
-  background-color: inherit;
-  float: left;
+::placeholder{
+  color:  #4c7356;
+  opacity: 0.5;
+}
+.flashes {
+  color: white;
+  text-align: center;
+}
+
+
+.form-button:hover {
+  background-color: #314a38;
+}
+.form-style-username{
+  background-color: white;
   border: none;
   outline: none;
-  cursor: pointer;
-  padding: 14px 16px;
+  color:  #4c7356;
+  cursor: text;
+  padding: 5px 5px;
+  border-radius: 18px;
   transition: 0.3s;
+  font-size: 18px;
 }
 
-/* Change background color of buttons on hover */
-.tab button:hover {
-  background-color: #ddd;
+.form-drop-down {
+  background-color: white;
+  border: none;
+  color: #4c7356;
+  font-weight: 100;  
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+  padding: 5px 5px;
+  font-size: 18px;
+  border-radius: 12px;
+}
+.label{
+  color: white;
+  font-weight: 100;
+  font-size: 20px;
+  padding: 5px 5px;
 }
 
+.form-button{
+  background-color:  #4c7356;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  font-weight: 900; 
+  display: inline-block;
+  cursor: pointer;
+  font-size: 20px;
+  border-radius: 12px;
+}
 /* Create an active/current tablink class */
-.tab button.active {
-  background-color: #ccc;
+.tab:hover {
+  background-color: #4c7356;
 }
 
-/* Style the tab content */
-.tabcontent {
-  display: none;
-  padding: 6px 12px;
-  border: 1px solid #ccc;
-  border-top: none;
-}
-  /*#user_button {
-    background-color: darkgreen;
-  }
-  input.form.register {
-    font-size: 18px;
-    background-color: darkgreen;
-  }*/
