@@ -152,10 +152,10 @@ def home():
         numRoomates = form.numRoomates.data
         travel_mode = form.travel_method.data
         commute = form.distance.data
-        footprint = food_footprt(diet) + home_footprt(housing, 
+        footprint = food_footprt(diet) + home_footprt(housing,
         numRooms, numRoomates) + travel_footprt(travel_mode, commute)
-        flash('you carbon foot print is '+ str(footprint) + ' lbs. of CO2/yr.')   
-    return render_template('home.html', title = 'Home', form = form,loggedin = current_user.is_active)
+        flash('your carbon foot print is '+ str(footprint) + ' lbs. of CO2/yr.')
+    return render_template('home.html', title = 'Home', form = form, loggedin = loggedin)
 
 @app.route('/account', methods=['POST', 'GET'])#home page
 @login_required
@@ -171,7 +171,7 @@ def account():
         numRoomates = form.numRoomates.data
         travel_mode = form.travel_method.data
         commute = form.distance.data
-        footprint = food_footprt(diet) + home_footprt(housing, 
+        footprint = food_footprt(diet) + home_footprt(housing,
         numRooms, numRoomates) + travel_footprt(travel_mode, commute)
         if current_user.is_active:#update user carbon use variable in databse
             Userdb.todouserdb.update_one({'id': current_user.id}, {"$set": {'housing': housing,
@@ -179,7 +179,7 @@ def account():
                                                                             'diet': diet,
                                                                             'numRoomates': numRoomates,
                                                                             'travel_mode': travel_mode,
-                                                                            'commute': commute}})                                                       
+                                                                            'commute': commute}})
             data = Userdb.todouserdb.find_one({'id': current_user.id})
             if 'footprint' in data:#make sure only one carbon input per day is calculated
                 FootprintList = data['footprint']

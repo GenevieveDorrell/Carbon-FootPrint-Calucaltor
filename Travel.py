@@ -6,13 +6,14 @@ BUS = 0.28 # Assumes half full bus on average
 # Calculate how much carbon is generated based on commuting and travel costs
 """
 mode:
-    conventional (GCAR)
-    hybrid (HCAR)
-    electric (ECAR)
-    non_motor
-    bus
+    'GCAR' (conventional)
+    'HCAR' (hybrid)
+    'ECAR' (electric)
+    'non_motor'
+    'bus'
 distance:
-    the usual distance traveled to get to campus every day integer >=0
+    the usual distance traveled to get to campus every day
+    integer >=0
 """
 
 def travel_footprt(mode, distance):

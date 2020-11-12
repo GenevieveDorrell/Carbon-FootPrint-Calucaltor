@@ -56,7 +56,7 @@ The electricity and carbon estimations based on certain activities were based on
 
 April 5, 2. (2019, November 19). Does Bus Transit Reduce Greenhouse Gas Emissions? Retrieved November 04, 2020, from https://reason.org/commentary/does-bus-transit-reduce-greenhouse/
 
-The carbon foodprint of 5 diets compared. (n.d.). Retrieved November 04, 2020, from http://shrinkthatfootprint.com/food-carbon-footprint-diet
+Fashion Footprint Calculator. (n.d.). Retrieved November 12, 2020, from https://www.thredup.com/fashionfootprint
 
 Frequently Asked Questions (FAQs) - U.S. Energy Information Administration (EIA). (n.d.). Retrieved November 04, 2020, from https://www.eia.gov/tools/faqs/faq.php?id=74
 
@@ -65,5 +65,7 @@ How Clean is Your Electric Vehicle? (n.d.). Retrieved November 07, 2020, from ht
 How Much Electricity on Average Do Homes in Your State Use? (Ranked by State). (n.d.). Retrieved November 04, 2020, from https://www.electricchoice.com/blog/electricity-on-average-do-homes/
 
 Pearce, F. (2019, May 23). In store or online - what's the environmentally friendliest way to shop? Retrieved November 08, 2020, from https://ensia.com/features/environmental-cost-online-shopping-delivery/
+
+The carbon foodprint of 5 diets compared. (n.d.). Retrieved November 04, 2020, from http://shrinkthatfootprint.com/food-carbon-footprint-diet
 
 
