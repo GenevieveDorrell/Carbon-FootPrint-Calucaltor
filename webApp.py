@@ -81,7 +81,7 @@ def register():
     user = form.username.data
     if form.validate_on_submit(): #check if form is filled out and submited
         if Userdb.todouserdb.find({"username": user},{}).count() == 0: #check to see if the username is in use
-            pas = hash_password(form.password.data)#hash password
+            pas = hash_password(form.password_set.data)#hash password
             id = Userdb.todouserdb.count({})#create user
             item_doc = {
                         'id' : id,
@@ -114,7 +114,7 @@ def login():
                 token = generate_auth_token()
                 Userdb.todouserdb.update_one(dbuser, {'$set': {'token': token}})
                 #flash('Logged in successfully.')
-                return redirect('/')
+                return redirect('/account')
             else:
                 flash('incorrect Password.')
         else:

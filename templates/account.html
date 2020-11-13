@@ -25,21 +25,37 @@
         {{ form.travel_method(class_="form-drop-down") }}</p>
         <p class="label">{{ form.distance.label }}<br>
         {{ form.distance(class_="form-style-username",placeholder="distance in miles") }}</p>
+        {% for error in form.distance.errors %}
+            <span style="color: white;">{{ error }}</span>
+        {% endfor %}
         <p class="label">{{ form.housing.label }}<br>
         {{ form.housing(class_="form-drop-down") }}</p>
         <p class="label">{{ form.numRooms.label }}<br>
         {{ form.numRooms(class_="form-style-username",placeholder="enter number of rooms") }}</p>
+        {% for error in form.numRooms.errors %}
+            <span style="color: white;">{{ error }}</span>
+        {% endfor %}
         <p class="label">{{ form.numRoomates.label }}<br>
         {{ form.numRoomates(class_="form-style-username",placeholder="enter number of roomates") }}</p>
+        {% for error in form.numRoomates.errors %}
+            <span style="color: white;">{{ error }}</span>
+        {% endfor %}
         <p class="label">{{ form.numPackages.label }}<br>
         {{ form.numPackages(class_="form-style-username",placeholder="numPackages ordered per month") }}</p>
-        <p class="label">{{ form.fast_delivery.label }}<br>
-        {{ form.fast_delivery(class_="form-bool") }}</p>
+        {% for error in form.numPackages.errors %}
+            <span style="color: white;">{{ error }}</span>
+        {% endfor %}
+        <p class="label">{{ form.fast_delivery(class_="form-bool") }} {{ form.fast_delivery.label }}</p>
         <p class="label">{{ form.used_clothing.label }}<br>
-        {{ form.used_clothing(class_="form-style-username",placeholder="% wardrobe bought used") }}</p>
+        {{ form.used_clothing(class_="form-style-username",placeholder="% wardrobe bouught used") }}</p>
+        {% for error in form.used_clothing.errors %}
+            <span style="color: white;">{{ error }}</span>
+        {% endfor %}
         <p class="label">{{ form.clothing_purchased.label }}<br>
-        {{ form.clothing_purchased(class_="form-style-username",placeholder="amount of clothes bought each month") }}</p>
-        <p>
+        {{ form.clothing_purchased(class_="form-style-username",placeholder="ammount of clothes bought each month") }}</p>
+        {% for error in form.clothing_purchased.errors %}
+            <span style="color: white;">{{ error }}</span>
+        {% endfor %}
         {% with messages = get_flashed_messages() %}
         {% if messages %}
           <ul class=flashes>
