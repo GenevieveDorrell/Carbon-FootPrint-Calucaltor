@@ -3,7 +3,7 @@ from flask import Flask, render_template, request, flash, redirect, url_for
 from werkzeug.utils import secure_filename
 from pymongo import MongoClient
 import logging
-from forms import LoginForm, CarbonFootprint
+from forms import LoginForm, CarbonFootprint, RegisterForm
 from flask_wtf.csrf import CSRFProtect
 from testToken import generate_auth_token, verify_auth_token
 from password import hash_password, verify_password
@@ -13,6 +13,7 @@ from flask_login import (LoginManager, current_user, login_required,
 from Food import food_footprt
 from Home import home_footprt
 from Travel import travel_footprt
+from Consumer import consumer_footprt_percent
 from datetime import date
 
 
@@ -76,7 +77,7 @@ class User(UserMixin):
 
 @app.route('/register', methods=['POST', 'GET'])
 def register():
-    form = LoginForm()
+    form = RegisterForm()
     user = form.username.data
     if form.validate_on_submit(): #check if form is filled out and submited
         if Userdb.todouserdb.find({"username": user},{}).count() == 0: #check to see if the username is in use
@@ -142,19 +143,26 @@ def about():
 #end of paste
 
 @app.route('/', methods=['POST', 'GET'])#home page
-@login_required
-def home():    
+def home(): 
+    #loggedin = current_user.is_active()   
     form = CarbonFootprint()
     if form.validate_on_submit(): #check if form is filled out and submited
+        print('validating')
         diet = form.food.data
         housing = form.housing.data
         numRooms = form.numRooms.data
         numRoomates = form.numRoomates.data
         travel_mode = form.travel_method.data
         commute = form.distance.data
+        clothing_purchased = form.clothing_purchased.data
+        used_clothing = form.used_clothing.data
+        numPackages = form.numPackages.data
+        fast_pkg = form.fast_delivery.data
         footprint = food_footprt(diet) + home_footprt(housing,
-        numRooms, numRoomates) + travel_footprt(travel_mode, commute)
-        flash('your carbon foot print is '+ str(footprint) + ' lbs. of CO2/yr.')
+        numRooms, numRoomates) + travel_footprt(travel_mode, 
+        commute) + consumer_footprt_percent(clothing_purchased, 
+        used_clothing, numPackages, fast_pkg)
+        flash('your carbon foot print is '+ str(round(footprint,2)) + ' lbs. of CO2/yr.')
     return render_template('home.html', title = 'Home', form = form)
 
 @app.route('/account', methods=['POST', 'GET'])#home page
@@ -171,26 +179,39 @@ def account():
         numRoomates = form.numRoomates.data
         travel_mode = form.travel_method.data
         commute = form.distance.data
+        clothing_purchased = form.clothing_purchased.data
+        used_clothing = form.used_clothing.data
+        numPackages = form.numPackages.data
+        fast_pkg = form.fast_delivery.data
         footprint = food_footprt(diet) + home_footprt(housing,
-        numRooms, numRoomates) + travel_footprt(travel_mode, commute)
+        numRooms, numRoomates) + travel_footprt(travel_mode, 
+        commute) + consumer_footprt_percent(clothing_purchased, 
+        used_clothing, numPackages, fast_pkg)
+        dailyFootprint = round(footprint/365, 2)
         if current_user.is_active:#update user carbon use variable in databse
             Userdb.todouserdb.update_one({'id': current_user.id}, {"$set": {'housing': housing,
                                                                             'numRooms': numRooms,
                                                                             'diet': diet,
                                                                             'numRoomates': numRoomates,
                                                                             'travel_mode': travel_mode,
-                                                                            'commute': commute}})
-            data = Userdb.todouserdb.find_one({'id': current_user.id})
+                                                                            'commute': commute,
+                                                                            'used_clothing': used_clothing,
+                                                                            'clothing_purchased': clothing_purchased,
+                                                                            'numPackages': numPackages,
+                                                                            'fast_pkg': fast_pkg}})
+            data = Userdb.todouserdb.find_one({'id': current_user.id})            
             if 'footprint' in data:#make sure only one carbon input per day is calculated
                 FootprintList = data['footprint']
                 if FootprintList[len(FootprintList)-1][1] == str(date.today()):
-                    FootprintList[len(FootprintList)-1][0] = footprint
+                    FootprintList[len(FootprintList)-1][0] = dailyFootprint
                     Userdb.todouserdb.update_one({'id': current_user.id}, {"$set": {'footprint': FootprintList}})
                 else:
-                    Userdb.todouserdb.update_one({'id': current_user.id}, {"$addToSet": {'footprint': [footprint, str(date.today())]}})
+                    Userdb.todouserdb.update_one({'id': current_user.id}, {"$addToSet": {'footprint': [dailyFootprint, str(date.today())]}})
             else:
                 Userdb.todouserdb.update_one({'id': current_user.id}, {"$addToSet": {'footprint': [footprint, str(date.today())]}})
-        flash('you carbon foot print is '+ str(footprint) + ' lbs. of CO2/yr.')
+        flash("Your carbon footprint for today is " + str(dailyFootprint) + " lbs. of CO2")
+    else:
+        flash("form is not all the way filled out")
     data = Userdb.todouserdb.find_one({'id': current_user.id})#looks up the user in db
     if 'footprint' in data:#prefill form with users last entry
         form.numRooms.data = data['numRooms']#
@@ -198,5 +219,9 @@ def account():
         form.numRoomates.data = data['numRoomates']
         form.travel_method.data = data['travel_mode']
         form.distance.data = data['commute']
-        form.food.data = data['diet']  
+        form.food.data = data['diet']
+        form.clothing_purchased.data = data['clothing_purchased']
+        form.used_clothing.data = data['used_clothing']
+        form.numPackages.data = data['numPackages']
+        form.fast_delivery.data = data['fast_pkg'] 
     return render_template('account.html', title = 'Home', form = form,)

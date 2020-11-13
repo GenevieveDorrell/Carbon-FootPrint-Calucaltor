@@ -7,7 +7,7 @@
 <head>
   <meta charset="utf-8">
     
-  <title>Carbon Footprint Calculator</title>
+  <title>Track Daily Footprint</title>
   <meta name="description" content="homepage">
   <meta name="Genevieve" content="Reverse Geocoding">
 
@@ -31,18 +31,16 @@
         {{ form.numRooms(class_="form-style-username",placeholder="enter number of rooms") }}</p>
         <p class="label">{{ form.numRoomates.label }}<br>
         {{ form.numRoomates(class_="form-style-username",placeholder="enter number of roomates") }}</p>
-        <p class="label">{{ form.packages.label }}<br>
-        {{ form.packages(class_="form-style-username",placeholder="packages ordered per month") }}</p>
+        <p class="label">{{ form.numPackages.label }}<br>
+        {{ form.numPackages(class_="form-style-username",placeholder="numPackages ordered per month") }}</p>
         <p class="label">{{ form.fast_delivery.label }}<br>
         {{ form.fast_delivery(class_="form-bool") }}</p>
         <p class="label">{{ form.used_clothing.label }}<br>
-        {{ form.used_clothing(class_="form-style-username",placeholder="% wardrobe bouught used") }}</p>
+        {{ form.used_clothing(class_="form-style-username",placeholder="% wardrobe bought used") }}</p>
         <p class="label">{{ form.clothing_purchased.label }}<br>
-        {{ form.clothing_purchased(class_="form-style-username",placeholder="ammount of clothes bought each month") }}</p>
-        <p class="label">{{ form.track_submit(class_="form-button") }}</p>
-        <p class="label">{{ form.delete(class_="form-button") }}</p>
-      </form>
-      {% with messages = get_flashed_messages() %}
+        {{ form.clothing_purchased(class_="form-style-username",placeholder="amount of clothes bought each month") }}</p>
+        <p>
+        {% with messages = get_flashed_messages() %}
         {% if messages %}
           <ul class=flashes>
           {% for message in messages %}
@@ -50,8 +48,13 @@
           {% endfor %}
           </ul>
         {% endif %}
-      {% endwith %}
-      {% block body %}{% endblock %}
+        {% endwith %}
+        {% block body %}{% endblock %}
+        </p>
+        <p class="label">{{ form.track_submit(class_="form-button") }}</p>      
+        <p class="label">{{ form.delete(class_="form-button") }}</p>
+      </form>
+      
   </div>
 </body>
 </html>

@@ -12,12 +12,19 @@
             <span style="color: white;">{{ error }}</span>
             {% endfor %}
         </p>
+
         <p>
-            {{ form.password(size=32, class_="form-style-username",placeholder="Password") }}<br>
-            {% for error in form.password.errors %}
+            {{ form.password_set(size=32, class_="form-style-username",placeholder="Password") }}<br>
+            {% for error in form.password_set.errors %}
+            <span style="color: white;">{{ error }}</span>
+            {% endfor %}
+        <br>
+            {{ form.confirm(size=32, class_="form-style-username",placeholder="Renter password") }}<br>
+            {% for error in form.confirm.errors %}
             <span style="color: white;">{{ error }}</span>
             {% endfor %}
         </p>
+        <p>
         {% with messages = get_flashed_messages() %}
         {% if messages %}
           <ul class=flashes>
@@ -25,9 +32,10 @@
             <p>{{ message }}</p>
           {% endfor %}
           </ul>
-        {% endif %}
-      {% endwith %}
-      {% block body %}{% endblock %}
+          {% endif %}
+        {% endwith %}
+        {% block body %}{% endblock %}
+        </p>
         <p>{{ form.register(class_="form-button") }}</p>
     </form>
 </div>

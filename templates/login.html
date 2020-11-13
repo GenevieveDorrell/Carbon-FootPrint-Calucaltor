@@ -19,7 +19,7 @@
             <span style="color: white;">{{ error }}</span>
             {% endfor %}
         </p>
-        <!--<p>{{ form.remember_me() }} {{ form.remember_me.label }}</p>-->
+        
         {% with messages = get_flashed_messages() %}
         {% if messages %}
           <ul class=flashes>
@@ -30,6 +30,7 @@
         {% endif %}
       {% endwith %}
       {% block body %}{% endblock %}   
+        <p class="label">{{ form.remember_me(class_="form-bool") }} {{ form.remember_me.label }}</p>
         <p>{{ form.submit(class_="form-button") }} {{ form.register(class_="form-button") }}</p>        
     </form>
     

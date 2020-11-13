@@ -25,6 +25,8 @@ clothing_n:
 
 def consumer_footprt_percent(clothing_n, used_clothing, pkgs_n,fast_delivery = False):
     carbon = 0
+    if used_clothing >= 1:
+        used_clothing = used_clothing/100
     if fast_delivery:
         # Multiply number of monthly packages by carbon per package by number of months
         carbon = ONLINE_PKG_ONE_DAY * pkgs_n * 12
