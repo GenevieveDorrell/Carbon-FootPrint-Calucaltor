@@ -8,3 +8,4 @@ WTForms
 passlib
 Flask-Login
 matplotlib
+gunicorn
