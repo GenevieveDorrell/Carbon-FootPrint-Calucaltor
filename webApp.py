@@ -18,7 +18,6 @@ from datetime import date
 
 
 
-
 UPLOAD_FOLDER = 'uploads'
 ALLOWED_EXTENSIONS = {'gpx'}
 
@@ -143,8 +142,8 @@ def about():
 #end of paste
 
 @app.route('/', methods=['POST', 'GET'])#home page
-def home(): 
-    #loggedin = current_user.is_active()   
+def home():
+    #loggedin = current_user.is_active()
     form = CarbonFootprint()
     if form.validate_on_submit(): #check if form is filled out and submited
         print('validating')
@@ -159,8 +158,8 @@ def home():
         numPackages = form.numPackages.data
         fast_pkg = form.fast_delivery.data
         footprint = food_footprt(diet) + home_footprt(housing,
-        numRooms, numRoomates) + travel_footprt(travel_mode, 
-        commute) + consumer_footprt_percent(clothing_purchased, 
+        numRooms, numRoomates) + travel_footprt(travel_mode,
+        commute) + consumer_footprt_percent(clothing_purchased,
         used_clothing, numPackages, fast_pkg)
         flash('your carbon foot print is '+ str(round(footprint,2)) + ' lbs. of CO2/yr.')
     return render_template('home.html', title = 'Home', form = form)
@@ -168,11 +167,11 @@ def home():
 @app.route('/account', methods=['POST', 'GET'])#home page
 @login_required
 def account():
-    form = CarbonFootprint()    
+    form = CarbonFootprint()
     if form.delete.data:
             Userdb.todouserdb.delete_one({'id': current_user.id})
             return redirect(url_for("logout"))
-    if form.validate_on_submit(): #check if form is filled out and submited        
+    if form.validate_on_submit(): #check if form is filled out and submited
         diet = form.food.data#get data from form
         housing = form.housing.data
         numRooms = form.numRooms.data
@@ -184,8 +183,8 @@ def account():
         numPackages = form.numPackages.data
         fast_pkg = form.fast_delivery.data
         footprint = food_footprt(diet) + home_footprt(housing,
-        numRooms, numRoomates) + travel_footprt(travel_mode, 
-        commute) + consumer_footprt_percent(clothing_purchased, 
+        numRooms, numRoomates) + travel_footprt(travel_mode,
+        commute) + consumer_footprt_percent(clothing_purchased,
         used_clothing, numPackages, fast_pkg)
         dailyFootprint = round(footprint/365, 2)
         if current_user.is_active:#update user carbon use variable in databse
@@ -199,7 +198,7 @@ def account():
                                                                             'clothing_purchased': clothing_purchased,
                                                                             'numPackages': numPackages,
                                                                             'fast_pkg': fast_pkg}})
-            data = Userdb.todouserdb.find_one({'id': current_user.id})            
+            data = Userdb.todouserdb.find_one({'id': current_user.id})
             if 'footprint' in data:#make sure only one carbon input per day is calculated
                 FootprintList = data['footprint']
                 if FootprintList[len(FootprintList)-1][1] == str(date.today()):
@@ -223,5 +222,5 @@ def account():
         form.clothing_purchased.data = data['clothing_purchased']
         form.used_clothing.data = data['used_clothing']
         form.numPackages.data = data['numPackages']
-        form.fast_delivery.data = data['fast_pkg'] 
+        form.fast_delivery.data = data['fast_pkg']
     return render_template('account.html', title = 'Home', form = form,)
