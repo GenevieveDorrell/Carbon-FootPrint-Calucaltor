@@ -1,2 +1,1 @@
-web:gunicorn webApp:app --log-file -
-heroku ps:scale web=1
+web:gunicorn webApp:app
