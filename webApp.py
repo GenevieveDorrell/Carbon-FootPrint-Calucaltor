@@ -147,7 +147,6 @@ def home():
     #loggedin = current_user.is_active()   
     form = CarbonFootprint()
     if form.validate_on_submit(): #check if form is filled out and submited
-        print('validating')
         diet = form.food.data
         housing = form.housing.data
         numRooms = form.numRooms.data
