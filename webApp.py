@@ -16,8 +16,6 @@ from Travel import travel_footprt
 from Consumer import consumer_footprt_percent
 from datetime import date
 
-
-
 UPLOAD_FOLDER = 'uploads'
 ALLOWED_EXTENSIONS = {'gpx'}
 
