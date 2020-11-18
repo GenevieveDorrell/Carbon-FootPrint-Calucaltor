@@ -1,6 +1,6 @@
 body {
     background-color: #8bc99c;
-    font-family: Verdana, Geneva, sans-serif;
+    font-family: "Trebuchet MS", Helvetica, sans-serif;
     overflow: hidden;
     width: 100%;
     margin:0;
@@ -11,12 +11,12 @@ body {
   h1 {
     color: white;
     text-align: center;
-    font-weight: 100;
+    font-weight: 300;
   }
   h2 {
     color: white;
     text-align: center;
-    font-weight: 100; 
+    font-weight: 200; 
     padding: 14px 16px;
 
   }
@@ -37,6 +37,7 @@ body {
     bottom: 0;
     text-align: center;
     bottom: 100px;
+    flex-flow: row wrap;
 }
 #footer {
   background-color: #5d916b;
@@ -67,6 +68,18 @@ body {
   bottom: 0;
   color: white;
   float: left;  
+}
+.Stab {
+  overflow: hidden;
+  border: none;
+  padding: 14px 16px;
+  outline: none;
+  background-color: #8bc99c;
+  font-size: 18px;
+  font-weight: 200;
+  bottom: 0;
+  color: white;
+  float: left; 
 }
 
 ::placeholder{
@@ -113,11 +126,17 @@ body {
   font-weight: 100;
   font-size: 20px;
   padding: 5px 5px;
+  line-height: 140%;
 }
 .user{
   float: right;
-  padding: 5px 5px;
+  padding: 5px 15px;
   background-color: #5d916b;
+  color: white;
+  text-decoration: none;
+}
+.user:hover{
+  color: #314a38;
 }
 
 .form-button{

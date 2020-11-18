@@ -17,6 +17,7 @@
 
 <body>     
     <div id = 'main'> 
+      <h2>Tracker</h2> 
       <form action="" method="post" novalidate>
         {{ form.hidden_tag() }}
         <p class="label">{{ form.food.label }}<br>
@@ -41,31 +42,33 @@
             <span style="color: white;">{{ error }}</span>
         {% endfor %}
         <p class="label">{{ form.numPackages.label }}<br>
-        {{ form.numPackages(class_="form-style-username",placeholder="numPackages ordered per month") }}</p>
-        {% for error in form.numPackages.errors %}
+        {{ form.numPackages(class_="form-style-username",size=30,placeholder="Packages ordered per month") }}<br>        
+        {{ form.fast_delivery(class_="form-bool") }} {{ form.fast_delivery.label }}
+          {% for error in form.numPackages.errors %}
             <span style="color: white;">{{ error }}</span>
         {% endfor %}
-        <p class="label">{{ form.fast_delivery(class_="form-bool") }} {{ form.fast_delivery.label }}</p>
+        </p>
         <p class="label">{{ form.used_clothing.label }}<br>
         {{ form.used_clothing(class_="form-style-username",placeholder="% wardrobe bought used") }}</p>
         {% for error in form.used_clothing.errors %}
             <span style="color: white;">{{ error }}</span>
         {% endfor %}
         <p class="label">{{ form.clothing_purchased.label }}<br>
-        {{ form.clothing_purchased(class_="form-style-username",placeholder="ammount of clothes bought each month") }}</p>
+        {{ form.clothing_purchased(class_="form-style-username",size=30,placeholder="clothing items bought per month") }}</p>
         {% for error in form.clothing_purchased.errors %}
             <span style="color: white;">{{ error }}</span>
         {% endfor %}
-        {% with messages = get_flashed_messages() %}
-        {% if messages %}
-          <ul class=flashes>
-          {% for message in messages %}
-            <p>{{ message }}</p>
-          {% endfor %}
-          </ul>
-        {% endif %}
-        {% endwith %}
-        {% block body %}{% endblock %}
+        <p>
+          {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            <ul class=flashes>
+            {% for message in messages %}
+              <p>{{ message }}</p>
+            {% endfor %}
+            </ul>
+            {% endif %}
+          {% endwith %}
+          {% block body %}{% endblock %}
         </p>
         <p class="label">{{ form.track_submit(class_="form-button") }}</p>      
         <p class="label">{{ form.delete(class_="form-button") }}</p>

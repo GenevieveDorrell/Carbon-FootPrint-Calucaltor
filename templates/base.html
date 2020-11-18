@@ -12,41 +12,30 @@
     </head>-->
     <body>        
         <div id="header">
-            <h1>Carbon Footprint Tracker</h1>
-            <!--<script>
-                var page = window.location.href.split("?")[0].split("/")
-                var title 
-                var link
-                if (page[page.length-1] == "login") {
-                    title = "Register as new User"
-                    link = "{{ url_for('register') }}"
-                } else if(page[page.length-1] == "register") {
-                    title = "Login"
-                    link = "{{ url_for('login') }}"
-                } else {
-                    title = "Logout"
-                    link = "{{ url_for('logout') }}"
-                }
-                var a = document.createElement('a');
-                var linkText = document.createTextNode(title);
-                a.appendChild(linkText);
-                a.title = title;
-                a.href = link;
-                document.getElementById("header").appendChild(a);
-              </script>-->  
+            <h1>Carbon Footprint Tracker</h1>             
         </div>
         <div class="tabs">
         <p>
         <form method="get" action="/about">
-            <button class='tab' type="submit">About</button>
+            <button id ='about' class='tab' type="submit">About </button>
         </form>
         <form method="get" action="/account">
-            <button class='tab' type="submit">Track my Footprint</button>
+            <button id='account' class='tab' type="submit">Track my Footprint</button>
         </form>
         <form method="get" action="/">
-            <button class='tab' type="submit">Quick Carbon Calculator</button>
+            <button id='home' class='tab' type="submit">Quick Carbon Calculator</button>
         </form>
-        <a class="user" href="{{ url_for('logout') }}">
+        <script>
+            var page = window.location.href.split("?")[0].split("/")
+            if (page[page.length-1] == "account") {
+                document.getElementById('account').className = "Stab"
+            } else if(page[page.length-1] == "about") {
+                document.getElementById('about').className = "Stab"
+            } else if(page[page.length-1] == ""){
+                document.getElementById('home').className = "Stab"
+            }
+          </script>
+        <a class="user" href="{{ url_for('logout') }}">  {{ loggedIn }}
             <img src="static/resources/PinClipart.png" alt="github" width="25" height="25">
         </a></p>
         </div>          
@@ -54,7 +43,7 @@
         <div id=footer>
             <p>by Genevieve and Jacob</p>
             <p>
-                <a class="logo" href="https://github.com/GenevieveDorrell/Carbon-FootPrint-Calucaltor" target="_blank">
+                <a class="logo" href="https://github.com/GenevieveDorrell/Carbon-FootPrint-Calucaltor" target="_blank"> 
                     <img src="static/resources/GitHub-Mark/PNG/GitHub-Mark-Light-120px-plus.png" alt="github" width="30" height="30">
                 </a>
             </p>
