@@ -18,6 +18,18 @@
 <body>      
     <div id='main'> 
       <h2>Calcualtor</h2> 
+      <p>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          <ul class=flashes>
+          {% for message in messages %}
+            <p>{{ message }}</p>
+          {% endfor %}
+          </ul>
+          {% endif %}
+        {% endwith %}
+        {% block body %}{% endblock %}
+      </p>
       <form action="" method="post" novalidate>
         {{ form.hidden_tag() }}
         <p class="label">{{ form.food.label }}<br>
@@ -58,19 +70,8 @@
         {% for error in form.clothing_purchased.errors %}
             <span style="color: white;">{{ error }}</span>
         {% endfor %}
-        <p>
-          {% with messages = get_flashed_messages() %}
-          {% if messages %}
-            <ul class=flashes>
-            {% for message in messages %}
-              <p>{{ message }}</p>
-            {% endfor %}
-            </ul>
-            {% endif %}
-          {% endwith %}
-          {% block body %}{% endblock %}
-        </p>
         <p class="label">{{ form.submit(class_="form-button") }}</p>
+        <p class="label">{{ form.track_submit(class_="form-button") }}</p> 
       </form>
   </div>
 </body>
