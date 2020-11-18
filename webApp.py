@@ -41,6 +41,11 @@ login_manager.login_view = "login"
 login_manager.login_message = u"Please log in to access this page."
 login_manager.refresh_view = "reauth"
 
+def logInOut():
+    if current_user.is_active:
+        return "Logout"
+    return "Sign in"
+
 @login_manager.user_loader
 def load_user(user_id):
     dbuserOBj = Userdb.todouserdb.find_one({"id": user_id})
@@ -77,6 +82,8 @@ class User(UserMixin):
 
 @app.route('/register', methods=['POST', 'GET'])
 def register():
+    if current_user.is_active:
+        return redirect(url_for("logout"))
     form = RegisterForm()
     user = form.username.data
     if form.validate_on_submit(): #check if form is filled out and submited
@@ -93,12 +100,14 @@ def register():
             return redirect(url_for("login"))
         else:
             flash("that username is already taken")
-    return render_template('register.html',  title='Register', form=form)
+    return render_template('register.html',  title='Register', form=form, loggedIn = logInOut())
 # step 3 in slides
 
 # This is one way. Using WTForms is another way.
 @app.route("/login", methods=["GET", "POST"])
 def login():
+    if current_user.is_active:
+        return redirect(url_for("logout"))
     form = LoginForm()
     if form.register.data:
             return redirect(url_for("register"))
@@ -119,7 +128,7 @@ def login():
                 flash('incorrect Password.')
         else:
             flash('unregistered user')
-    return render_template('login.html',  title='Sign In', form=form)
+    return render_template('login.html',  title='Sign In', form=form, loggedIn = logInOut())
 
 @app.route("/reauth", methods=["GET", "POST"])
 @login_required
@@ -139,7 +148,7 @@ def logout():
 
 @app.route("/about")
 def about():
-    return render_template('about.html',loggedin = current_user.is_active)
+    return render_template('about.html', loggedIn = logInOut())
 #end of paste
 
 @app.route('/', methods=['POST', 'GET'])#home page
@@ -162,7 +171,7 @@ def home():
         commute) + consumer_footprt_percent(clothing_purchased, 
         used_clothing, numPackages, fast_pkg)
         flash('your carbon foot print is '+ str(round(footprint,2)) + ' lbs. of CO2/yr.')
-    return render_template('home.html', title = 'Home', form = form)
+    return render_template('home.html', title = 'Home', form = form, loggedIn = logInOut())
 
 @app.route('/account', methods=['POST', 'GET'])#home page
 @login_required
@@ -212,6 +221,7 @@ def account():
     else:
         flash("form is not all the way filled out")
     data = Userdb.todouserdb.find_one({'id': current_user.id})#looks up the user in db
+
     if 'footprint' in data:#prefill form with users last entry
         form.numRooms.data = data['numRooms']#
         form.housing.data = data['housing']
@@ -223,4 +233,4 @@ def account():
         form.used_clothing.data = data['used_clothing']
         form.numPackages.data = data['numPackages']
         form.fast_delivery.data = data['fast_pkg'] 
-    return render_template('account.html', title = 'Home', form = form,)
+    return render_template('account.html', title = 'Home', form = form, loggedIn = logInOut())

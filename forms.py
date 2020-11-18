@@ -11,7 +11,7 @@ class LoginForm(FlaskForm):
     submit = SubmitField('sign in')
 
 class RegisterForm(FlaskForm):
-    username = StringField('Username', validators=[InputRequired(), Length(min=6,max=24,message="Password must be at leat 6 characters")])
+    username = StringField('Username', validators=[InputRequired(), Length(min=6,max=24,message="Username must be at leat 6 characters")])
     password_set = PasswordField('Password', validators=[
         InputRequired(),
         EqualTo('confirm', message='Passwords must match')
@@ -32,8 +32,8 @@ class CarbonFootprint(FlaskForm):
     numRoomates = IntegerField('Roomates', validators=[InputRequired(), NumberRange(min=0, max=None, message="Cannot enter a negative distance")])
     numPackages = IntegerField('Number of Packages', validators=[InputRequired(), NumberRange(min=0, max=None, message="Cannot enter a negative distance")])
     fast_delivery = BooleanField("Fast delivery")
-    used_clothing = IntegerField('Percent of Wardrobe bought used', validators=[InputRequired(), NumberRange(min=0, max=100, message="enter a percentage ie. 0-1 or 1-100")])#add min and max
-    clothing_purchased = IntegerField('number of clothing items perchased per month', validators=[InputRequired(), NumberRange(min=0, max=None, message="Cannot enter a negative distance")])
+    used_clothing = IntegerField('Used clothes', validators=[InputRequired(), NumberRange(min=0, max=100, message="enter a percentage ie. 0-1 or 1-100")])#add min and max
+    clothing_purchased = IntegerField('Clothing items bought per month', validators=[InputRequired(), NumberRange(min=0, max=None, message="Cannot enter a negative distance")])
     track_submit = SubmitField('Track Carbon Footprint')
     submit = SubmitField('Calculate Carbon Footprint')
     delete = SubmitField('Delete Acount')
