@@ -5,4 +5,4 @@ python3 getApiKey.py
 source env/bin/activate
 pip install -r requirements.txt
 export FLASK_APP=webApp.py
-source run.cmd
+python -m flask run

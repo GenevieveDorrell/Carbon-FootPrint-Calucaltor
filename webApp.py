@@ -15,6 +15,7 @@ from Home import home_footprt
 from Travel import travel_footprt
 from Consumer import consumer_footprt_percent
 from datetime import date
+from avg_carbon import avg_carbon, avg_carbon_str
 
 UPLOAD_FOLDER = 'uploads'
 ALLOWED_EXTENSIONS = {'gpx'}
@@ -163,11 +164,52 @@ def home():
         used_clothing = form.used_clothing.data
         numPackages = form.numPackages.data
         fast_pkg = form.fast_delivery.data
-        footprint = food_footprt(diet) + home_footprt(housing,
+        footprint = round(food_footprt(diet) + home_footprt(housing,
         numRooms, numRoomates) + travel_footprt(travel_mode,
         commute) + consumer_footprt_percent(clothing_purchased,
-        used_clothing, numPackages, fast_pkg)
-        flash('your carbon foot print is '+ str(round(footprint,2)) + ' lbs. of CO2/yr.')
+        used_clothing, numPackages, fast_pkg),2)
+        if current_user.is_active:#update user carbon use variable in databse
+                dailyFootprint = round(footprint/365, 2)
+                Userdb.todouserdb.update_one({'id': current_user.id}, {"$set": {'housing': housing,
+                                                                                'numRooms': numRooms,
+                                                                                'diet': diet,
+                                                                                'numRoomates': numRoomates,
+                                                                                'travel_mode': travel_mode,
+                                                                                'commute': commute,
+                                                                                'used_clothing': used_clothing,
+                                                                                'clothing_purchased': clothing_purchased,
+                                                                                'numPackages': numPackages,
+                                                                                'fast_pkg': fast_pkg}})
+                data = Userdb.todouserdb.find_one({'id': current_user.id})
+                if 'footprint' in data:#make sure only one carbon input per day is calculated
+                    FootprintList = data['footprint']
+                    if FootprintList[len(FootprintList)-1][1] == str(date.today()):
+                        FootprintList[len(FootprintList)-1][0] = dailyFootprint
+                        Userdb.todouserdb.update_one({'id': current_user.id}, {"$set": {'footprint': FootprintList}})
+                    else:
+                        Userdb.todouserdb.update_one({'id': current_user.id}, {"$addToSet": {'footprint': [dailyFootprint, str(date.today())]}})
+                else:
+                    Userdb.todouserdb.update_one({'id': current_user.id}, {"$addToSet": {'footprint': [dailyFootprint, str(date.today())]}})
+                flash("Your carbon footprint for today is " + str(dailyFootprint) + " lbs. of CO2")
+                avg_carbon(footprint,str(current_user.id))
+        if form.submit.data:#caculating
+            flash('your carbon foot print is '+ str(footprint) + ' lbs. of CO2/yr.')
+            flash(avg_carbon_str(footprint))
+        elif form.track_submit.data: #tracking
+            return redirect(url_for("account"))
+    if current_user.is_active:
+        data = Userdb.todouserdb.find_one({'id': current_user.id})#looks up the user in db
+        if 'footprint' in data:#prefill form with users last entry
+            form.numRooms.data = data['numRooms']#
+            form.housing.data = data['housing']
+            form.numRoomates.data = data['numRoomates']
+            form.travel_method.data = data['travel_mode']
+            form.distance.data = data['commute']
+            form.food.data = data['diet']
+            form.clothing_purchased.data = data['clothing_purchased']
+            form.used_clothing.data = data['used_clothing']
+            form.numPackages.data = data['numPackages']
+            form.fast_delivery.data = data['fast_pkg']
     return render_template('home.html', title = 'Home', form = form, loggedIn = logInOut())
 
 @app.route('/account', methods=['POST', 'GET'])#home page
@@ -177,57 +219,7 @@ def account():
     if form.delete.data:
             Userdb.todouserdb.delete_one({'id': current_user.id})
             return redirect(url_for("logout"))
-    if form.validate_on_submit(): #check if form is filled out and submited
-        diet = form.food.data#get data from form
-        housing = form.housing.data
-        numRooms = form.numRooms.data
-        numRoomates = form.numRoomates.data
-        travel_mode = form.travel_method.data
-        commute = form.distance.data
-        clothing_purchased = form.clothing_purchased.data
-        used_clothing = form.used_clothing.data
-        numPackages = form.numPackages.data
-        fast_pkg = form.fast_delivery.data
-        footprint = food_footprt(diet) + home_footprt(housing,
-        numRooms, numRoomates) + travel_footprt(travel_mode,
-        commute) + consumer_footprt_percent(clothing_purchased,
-        used_clothing, numPackages, fast_pkg)
-        dailyFootprint = round(footprint/365, 2)
-        if current_user.is_active:#update user carbon use variable in databse
-            Userdb.todouserdb.update_one({'id': current_user.id}, {"$set": {'housing': housing,
-                                                                            'numRooms': numRooms,
-                                                                            'diet': diet,
-                                                                            'numRoomates': numRoomates,
-                                                                            'travel_mode': travel_mode,
-                                                                            'commute': commute,
-                                                                            'used_clothing': used_clothing,
-                                                                            'clothing_purchased': clothing_purchased,
-                                                                            'numPackages': numPackages,
-                                                                            'fast_pkg': fast_pkg}})
-            data = Userdb.todouserdb.find_one({'id': current_user.id})
-            if 'footprint' in data:#make sure only one carbon input per day is calculated
-                FootprintList = data['footprint']
-                if FootprintList[len(FootprintList)-1][1] == str(date.today()):
-                    FootprintList[len(FootprintList)-1][0] = dailyFootprint
-                    Userdb.todouserdb.update_one({'id': current_user.id}, {"$set": {'footprint': FootprintList}})
-                else:
-                    Userdb.todouserdb.update_one({'id': current_user.id}, {"$addToSet": {'footprint': [dailyFootprint, str(date.today())]}})
-            else:
-                Userdb.todouserdb.update_one({'id': current_user.id}, {"$addToSet": {'footprint': [footprint, str(date.today())]}})
-        flash("Your carbon footprint for today is " + str(dailyFootprint) + " lbs. of CO2")
-    else:
-        flash("form is not all the way filled out")
-    data = Userdb.todouserdb.find_one({'id': current_user.id})#looks up the user in db
-
-    if 'footprint' in data:#prefill form with users last entry
-        form.numRooms.data = data['numRooms']#
-        form.housing.data = data['housing']
-        form.numRoomates.data = data['numRoomates']
-        form.travel_method.data = data['travel_mode']
-        form.distance.data = data['commute']
-        form.food.data = data['diet']
-        form.clothing_purchased.data = data['clothing_purchased']
-        form.used_clothing.data = data['used_clothing']
-        form.numPackages.data = data['numPackages']
-        form.fast_delivery.data = data['fast_pkg']
-    return render_template('account.html', title = 'Home', form = form, loggedIn = logInOut())
+    data = Userdb.todouserdb.find_one({'id': current_user.id})
+    if 'footprint' not in data:
+        flash("we have no carbon data on your account go to the carbon calculator")
+    return render_template('account.html', title = 'Home', form = form, loggedIn = logInOut(), image= str(current_user.id)+"_avg_carbon.png")

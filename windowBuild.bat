@@ -6,4 +6,4 @@ py -m pip install --upgrade pip
 for /F "tokens=*" %%A in (requirements.txt) do pip install %%A
 CALL python .\getApiKey.py 
 SET FLASK_APP=webApp.py
-CALL run.cmd
+python -m flask run
