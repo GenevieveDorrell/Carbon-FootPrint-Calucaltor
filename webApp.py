@@ -28,7 +28,7 @@ app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 csrf.init_app(app)
 
 
-client = MongoClient('mongodb://localhost:27017/data')
+client = MongoClient('mongodb+srv://me:WTHbZX7112b5JWqV@cluster0.ffnmh.mongodb.net/todouserdb?retryWrites=true&w=majority')
 Userdb = client.todouserdb
 
 
@@ -192,6 +192,7 @@ def home():
                     Userdb.todouserdb.update_one({'id': current_user.id}, {"$addToSet": {'footprint': [dailyFootprint, str(date.today())]}})
                 flash("Your carbon footprint for today is " + str(dailyFootprint) + " lbs. of CO2")
                 avg_carbon(footprint,str(current_user.id))
+                #avg_carbon(data['footprint'], str(current_user.id))#????????????????????????????????????????????????????????????????????????????????????????????????????????????
         if form.submit.data:#caculating
             flash('your carbon foot print is '+ str(footprint) + ' lbs. of CO2/yr.')
             flash(avg_carbon_str(footprint))
@@ -218,6 +219,7 @@ def account():
     form = CarbonFootprint()
     if form.delete.data:
             Userdb.todouserdb.delete_one({'id': current_user.id})
+            os.remove(str(current_user.id)+"_avg_carbon.png")
             return redirect(url_for("logout"))
     data = Userdb.todouserdb.find_one({'id': current_user.id})
     if 'footprint' not in data:
