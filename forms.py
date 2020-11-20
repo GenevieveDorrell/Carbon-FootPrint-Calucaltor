@@ -37,7 +37,3 @@ class CarbonFootprint(FlaskForm):
     track_submit = SubmitField('Track Carbon Footprint')
     submit = SubmitField('Calculate Carbon Footprint')
     delete = SubmitField('Delete Account')
-<<<<<<< HEAD
-=======
-    
->>>>>>> d4f4ca099acb86dc09f741c1e4d6eef6ff420acf
