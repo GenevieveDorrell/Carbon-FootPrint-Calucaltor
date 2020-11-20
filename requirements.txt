@@ -2,6 +2,10 @@ geopy
 Flask
 gpxpy
 pymongo
+dnspython
+snappy
+gssapi
+srv
 Flask-PyMongo
 Flask-WTF
 WTForms
