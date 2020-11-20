@@ -1,12 +1,9 @@
 geopy
 Flask
 gpxpy
+wheel
 pymongo
 dnspython
-snappy
-gssapi
-srv
-tls
 Flask-PyMongo
 Flask-WTF
 WTForms
