@@ -17,13 +17,9 @@ from Consumer import consumer_footprt_percent
 from datetime import date
 from avg_carbon import avg_carbon, avg_carbon_str
 
-UPLOAD_FOLDER = 'uploads'
-ALLOWED_EXTENSIONS = {'gpx'}
-
 #flask app home base
 csrf = CSRFProtect()
 app = Flask(__name__)
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 csrf.init_app(app)
 
@@ -226,6 +222,6 @@ def account():
             return redirect(url_for("logout"))
     data = Userdb.todouserdb.find_one({'id': current_user.id})
     if 'footprint' not in data:
-        flash("we have no carbon data on your account go to the carbon calculator")
-    print("hmmmmm3")
+        flash("we have no carbon data on your account go to the carbon calculator")    
     return render_template('account.html', title = 'Home', form = form, loggedIn = logInOut(), image= str(current_user.id)+"_avg_carbon.png")
+print("hmmmmm3")
