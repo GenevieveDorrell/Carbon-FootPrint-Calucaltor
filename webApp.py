@@ -30,7 +30,7 @@ csrf.init_app(app)
 print("hmmmmm")
 
 client = MongoClient('mongodb+srv://heroku:GP4Pm7euNlmOdXnF@cluster0.ffnmh.mongodb.net/todouserdb?retryWrites=true&w=majority')
-print("hmmmmm")
+
 Userdb = client.todouserdb
 
 
@@ -40,7 +40,7 @@ login_manager.setup_app(app)
 login_manager.login_view = "login"
 login_manager.login_message = u"Please log in to access this page."
 login_manager.refresh_view = "reauth"
-
+print("hmmmmm1")
 def logInOut():
     if current_user.is_active:
         return "Logout"
@@ -79,7 +79,7 @@ class User(UserMixin):
 
     def is_anonymous(self):
         return False
-
+print("hmmmmm7")
 @app.route('/register', methods=['POST', 'GET'])
 def register():
     if current_user.is_active:
@@ -153,6 +153,7 @@ def about():
 
 @app.route('/', methods=['POST', 'GET'])#home page
 def home():
+    print("hmmmmm2")
     #loggedin = current_user.is_active()
     form = CarbonFootprint()
     if form.validate_on_submit(): #check if form is filled out and submited
@@ -226,4 +227,5 @@ def account():
     data = Userdb.todouserdb.find_one({'id': current_user.id})
     if 'footprint' not in data:
         flash("we have no carbon data on your account go to the carbon calculator")
+    print("hmmmmm3")
     return render_template('account.html', title = 'Home', form = form, loggedIn = logInOut(), image= str(current_user.id)+"_avg_carbon.png")
