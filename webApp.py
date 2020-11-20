@@ -27,8 +27,10 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 csrf.init_app(app)
 
+print("hmmmmm")
 
 client = MongoClient('mongodb+srv://heroku:GP4Pm7euNlmOdXnF@cluster0.ffnmh.mongodb.net/todouserdb?retryWrites=true&w=majority')
+print("hmmmmm")
 Userdb = client.todouserdb
 
 
