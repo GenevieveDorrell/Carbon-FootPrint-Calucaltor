@@ -1,4 +1,4 @@
-  
+
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, SubmitField, SelectField, IntegerField, validators
 from wtforms.validators import InputRequired, EqualTo, Length, NumberRange
@@ -25,16 +25,19 @@ class RegisterForm(FlaskForm):
 class CarbonFootprint(FlaskForm):
     food = SelectField('Diet', choices=[('vegan', 'vegan'), ('vegetarian', 'vegetarian'),
      ('white_meat_only', 'white meat only'), ('med_meat', 'medium meat'), ('high_meat', 'high meat')])
-    travel_method = SelectField('Transproation', choices=[('gcar','gas car'),('hcar', 'hybrid car'),('bus', 'bus'),('non_motor', 'walk or bike')])
-    distance = IntegerField('Daily Commute', validators=[InputRequired(), NumberRange(min=0, max=None, message="Cannot enter a negative distance")])
+    travel_method = SelectField('Transportation', choices=[('gcar','gas car'),('hcar', 'hybrid car'),('bus', 'bus'),('non_motor', 'walk or bike')])
+    distance = IntegerField('Daily Commute (one way)', validators=[InputRequired(), NumberRange(min=0, max=None, message="Cannot enter a negative distance")])
     housing = SelectField('Housing', choices=[('dorm', 'dorm'),('off_apartment','apartment'),('off_house','house')])
-    numRooms = IntegerField('Rooms', validators=[InputRequired(), NumberRange(min=0, max=None, message="Cannot enter a negative distance")])
+    numRooms = IntegerField('Bedrooms', validators=[InputRequired(), NumberRange(min=0, max=None, message="Cannot enter a negative distance")])
     numRoomates = IntegerField('Roomates', validators=[InputRequired(), NumberRange(min=0, max=None, message="Cannot enter a negative distance")])
-    numPackages = IntegerField('Number of Packages', validators=[InputRequired(), NumberRange(min=0, max=None, message="Cannot enter a negative distance")])
+    numPackages = IntegerField('Number of packages/month', validators=[InputRequired(), NumberRange(min=0, max=None, message="Cannot enter a negative distance")])
     fast_delivery = BooleanField("Fast delivery")
     used_clothing = IntegerField('% Used clothes', validators=[InputRequired(), NumberRange(min=0, max=100, message="enter a percentage ie. 0-1 or 1-100")])#add min and max
     clothing_purchased = IntegerField('Clothing items bought per month', validators=[InputRequired(), NumberRange(min=0, max=None, message="Cannot enter a negative distance")])
     track_submit = SubmitField('Track Carbon Footprint')
     submit = SubmitField('Calculate Carbon Footprint')
     delete = SubmitField('Delete Account')
+<<<<<<< HEAD
+=======
     
+>>>>>>> d4f4ca099acb86dc09f741c1e4d6eef6ff420acf

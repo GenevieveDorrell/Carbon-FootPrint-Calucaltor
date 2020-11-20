@@ -1,7 +1,6 @@
 #Graphs the user's carbon against a baseline average
-import matplotlib.pyplot as plt
-
 AVG_CARBON = 5000
+import matplotlib.pyplot as plt
 
 def avg_carbon(usr_carbon, userID):
 

@@ -3,7 +3,7 @@
 <!-- Our own style sheet -->
 <link rel="stylesheet" href="/static/css/home.css" />
 <div id = 'main'>
-    <h2>enter a username and password</h2>    
+    <h2>enter a username and password</h2>
     <form action="" method="post" novalidate>
         {{ form.hidden_tag() }}
         <p>
@@ -19,7 +19,7 @@
             <span style="color: white;">{{ error }}</span>
             {% endfor %}
         <br>
-            {{ form.confirm(size=32, class_="form-style-username",placeholder="Renter password") }}<br>
+            {{ form.confirm(size=32, class_="form-style-username",placeholder="Reenter password") }}<br>
             {% for error in form.confirm.errors %}
             <span style="color: white;">{{ error }}</span>
             {% endfor %}

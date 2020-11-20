@@ -6,17 +6,23 @@
     </form>
 <head>
   <meta charset="utf-8">
-    
+
   <title>Carbon Footprint Calculator</title>
   <meta name="description" content="homepage">
-  <meta name="Genevieve" content="Reverse Geocoding">
+  <meta name="Genevieve" content="Carbon Footprint Calculator">
 
   <link rel="stylesheet" href="static/css/home.css"/>
 
 </head>
 
+<<<<<<< HEAD
+<body>
+    <div id='main'>
+      <h2>Calcualtor</h2>
+=======
 <body>      
     <div id='main'> 
+>>>>>>> d4f4ca099acb86dc09f741c1e4d6eef6ff420acf
       <p>
         {% with messages = get_flashed_messages() %}
         {% if messages %}
@@ -53,7 +59,7 @@
             <span style="color: white;">{{ error }}</span>
         {% endfor %}
         <p class="label">{{ form.numPackages.label }}<br>
-        {{ form.numPackages(class_="form-style-username",size=35,placeholder="Packages ordered per month") }}<br>        
+        {{ form.numPackages(class_="form-style-username",size=35,placeholder="Packages ordered per month") }}<br>
         {{ form.fast_delivery(class_="form-bool") }} {{ form.fast_delivery.label }}
           {% for error in form.numPackages.errors %}
             <span style="color: white;">{{ error }}</span>
@@ -70,7 +76,7 @@
             <span style="color: white;">{{ error }}</span>
         {% endfor %}
         <p class="label">{{ form.submit(class_="form-button") }}</p>
-        <p class="label">{{ form.track_submit(class_="form-button") }}</p> 
+        <p class="label">{{ form.track_submit(class_="form-button") }}</p>
       </form>
   </div>
 </body>
