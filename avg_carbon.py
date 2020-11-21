@@ -27,7 +27,7 @@ def avg_carbon(usr_carbon, userID):
     plt.ylabel("lbs. of CO2 per day")
     plt.xlabel("Date")
 
-    path = "static/figures/"+userID+"_avg_carbon"#added username to create folders for user for syconicity
+    path = "static/figures/"+ userID +"_avg_carbon"#added username to create folders for user for syconicity
     plt.savefig(path, bbox_inches='tight', transparent=True)
     #plt.show()
 
