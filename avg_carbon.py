@@ -21,7 +21,7 @@ def avg_carbon(usr_carbon, userID):
     if len(dates > 1):
         plt.plot(dates, dcarbon, linewidth=2, label="Your carbon")
     else:
-        ax.axhline(dcarbon[0], linewidth=2, label="Your carbon")
+        ax.axhline(dcarbon[0], linewidth=2, label="Your carbon (projected until you enter more data)")
     ax.axhline(DAILY_AVG, linewidth=2, linestyle='--', color = 'r', label="Average carbon")
     plt.title("Your carbon vs. the average college student in a dorm")
     plt.ylabel("lbs. of CO2 per day")
