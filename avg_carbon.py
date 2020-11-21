@@ -18,7 +18,7 @@ def avg_carbon(usr_carbon, userID):
     ax.xaxis.set_major_formatter(formatter)
     locator = mdates.DayLocator()
     ax.xaxis.set_major_locator(locator)
-    if len(dates > 1):
+    if (len(dates) > 1):
         plt.plot(dates, dcarbon, linewidth=2, label="Your carbon")
     else:
         ax.axhline(dcarbon[0], linewidth=2, label="Your carbon (projected until you enter more data)")
