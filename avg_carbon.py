@@ -3,7 +3,7 @@ AVG_CARBON = 5000
 import matplotlib.pyplot as plt
 
 def avg_carbon(usr_carbon, userID):
-
+    print(usr_carbon)
     plt.figure(figsize=(4,6))
     plt.axhline(y = AVG_CARBON, color = 'r', linestyle='--', linewidth=2)
     plt.axhline(y = usr_carbon, color = 'b', linestyle='-', linewidth=3)
