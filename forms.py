@@ -36,4 +36,4 @@ class CarbonFootprint(FlaskForm):
     clothing_purchased = IntegerField('Clothing items bought per month', validators=[InputRequired(), NumberRange(min=0, max=None, message="Cannot enter a negative distance")])
     track_submit = SubmitField('Track Carbon Footprint')
     submit = SubmitField('Calculate Carbon Footprint')
-    delete = SubmitField('Delete Account')   
+    delete = SubmitField('Delete Account')
