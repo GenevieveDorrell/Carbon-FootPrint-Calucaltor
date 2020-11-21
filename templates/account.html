@@ -17,6 +17,7 @@
 
 <body>     
     <div id = 'main'> 
+    <div class="form">
       <h2>Tracker</h2> 
       <p>
           {% with messages = get_flashed_messages() %}
@@ -34,7 +35,7 @@
       <form action="" method="post" novalidate>           
         <p class="label">{{ form.delete(class_="form-button") }}</p>
       </form>
-      
+    </div>
   </div>
 </body>
 </html>

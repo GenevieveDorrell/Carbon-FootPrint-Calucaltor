@@ -17,6 +17,7 @@
 
 <body>
     <div id='main'>
+      
       <p>
         {% with messages = get_flashed_messages() %}
         {% if messages %}
@@ -29,48 +30,59 @@
         {% endwith %}
         {% block body %}{% endblock %}
       </p>
+      
       <form action="" method="post" novalidate>
         {{ form.hidden_tag() }}
+        <div class="wrap">
+        <div class="form">
         <p class="label">{{ form.food.label }}<br>
-        {{ form.food(class_="form-drop-down") }}</p>
+        {{ form.food(class_="form-drop-down") }}</p></div>
+        <div class="form">
         <p class="label">{{ form.travel_method.label }}<br>
-        {{ form.travel_method(class_="form-drop-down") }}</p>
+        {{ form.travel_method(class_="form-drop-down") }}</p></div>
+        <div class="form">
         <p class="label">{{ form.distance.label }}<br>
         {{ form.distance(class_="form-style-username",placeholder="distance in miles") }}</p>
         {% for error in form.distance.errors %}
             <span style="color: white;">{{ error }}</span>
-        {% endfor %}
+        {% endfor %}</div>
+        <div class="form">
         <p class="label">{{ form.housing.label }}<br>
-        {{ form.housing(class_="form-drop-down") }}</p>
+        {{ form.housing(class_="form-drop-down") }}</p></div>
+        <div class="form">
         <p class="label">{{ form.numRooms.label }}<br>
         {{ form.numRooms(class_="form-style-username",placeholder="enter number of rooms") }}</p>
         {% for error in form.numRooms.errors %}
             <span style="color: white;">{{ error }}</span>
-        {% endfor %}
+        {% endfor %}</div>
+        <div class="form">
         <p class="label">{{ form.numRoomates.label }}<br>
         {{ form.numRoomates(class_="form-style-username",placeholder="enter number of roomates") }}</p>
         {% for error in form.numRoomates.errors %}
             <span style="color: white;">{{ error }}</span>
-        {% endfor %}
+        {% endfor %}</div>
+        <div class="form">
         <p class="label">{{ form.numPackages.label }}<br>
         {{ form.numPackages(class_="form-style-username",size=35,placeholder="Packages ordered per month") }}<br>
         {{ form.fast_delivery(class_="form-bool") }} {{ form.fast_delivery.label }}
           {% for error in form.numPackages.errors %}
             <span style="color: white;">{{ error }}</span>
         {% endfor %}
-        </p>
+        </p></div>
+        <div class="form">
         <p class="label">{{ form.used_clothing.label }}<br>
         {{ form.used_clothing(class_="form-style-username",placeholder="% wardrobe bought used") }}</p>
         {% for error in form.used_clothing.errors %}
             <span style="color: white;">{{ error }}</span>
-        {% endfor %}
+        {% endfor %}</div>
+        <div class="form">
         <p class="label">{{ form.clothing_purchased.label }}<br>
         {{ form.clothing_purchased(class_="form-style-username",size=35,placeholder="clothing items bought per month") }}</p>
         {% for error in form.clothing_purchased.errors %}
             <span style="color: white;">{{ error }}</span>
-        {% endfor %}
-        <p class="label">{{ form.submit(class_="form-button") }}</p>
-        <p class="label">{{ form.track_submit(class_="form-button") }}</p>
+        {% endfor %}</div>
+        <p class="bs">{{ form.submit(class_="form-button") }} {{ form.track_submit(class_="form-button") }}</p>
+      </div>
       </form>
   </div>
 </body>

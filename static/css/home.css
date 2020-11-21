@@ -1,17 +1,18 @@
-body {
+body {    
     background-color: #8bc99c;
     font-family: "Trebuchet MS", Helvetica, sans-serif;
     overflow: hidden;
     width: 100%;
     margin:0;
     padding:0;
-    height: 100%;
+    height: 100%;    
   }
   
   h1 {
     color: white;
     text-align: center;
-    font-weight: 300;
+    font-weight: 400;
+    font-size: 40px;
   }
   h2 {
     color: white;
@@ -20,42 +21,83 @@ body {
     padding: 14px 16px;
 
   }
+  p{
+    color: white;
+    line-height: 200%;
+
+  }
   #header {
-    background-color: #5d916b;
+    
+    /*background-color: #5d916b;*/
+    background-image: 
+    /* top, transparent red*/
+    linear-gradient(
+      rgba(93, 145, 107, 0.7), 
+      rgba(93, 145, 107, 1)
+    ),
+    /* bottom, image */
+    url('../resources/Otree2.jpg');
+    background-repeat: no-repeat;
+    background-size: 100%;
     position: absolute;
     width: 100%;
     margin:0;
+    background-color: #5d916b;
     padding:0;
-    height: 75px;
+    height: 100px;
   }
   #main {
-    /* Provide scrollbars if needed, position below header, and derive height from top/bottom */
+    /* Provide scrollbars if needed, position below header, and derive height from top/bottom background-color:#8bc99c;*/
     overflow: auto;
     position: absolute;
     width: 100%;
-    top: 150px;
+    top: 180px;
     bottom: 0;
+    bottom: 110px;
     text-align: center;
-    bottom: 100px;
-    flex-flow: row wrap;
 }
 #footer {
-  background-color: #5d916b;
+  /*background-color: #5d916b;*/
   overflow: auto;
   position: absolute;
   color: white;
+  background-image: 
+    /* top, transparent red*/
+    linear-gradient(
+      rgba(93, 145, 107, 1), 
+      rgba(93, 145, 107, 0.8)
+    ),
+    /* bottom, image */
+    url('../resources/Otree2.jpg');
+    background-repeat: no-repeat;
+    background-size: 100%;
+  background-color: #5d916b;
   width: 100%;
   bottom: 0;
   height: 100px;
   text-align: center;
 }
+.wrap{
+  display: inline;;
+  justify-content: flex-start;
+  vertical-align: text-top;
+}
+.form{
+  /*background-color:rgba(93, 145, 107, 0.6);*/
+  display: inline-block; 
+  vertical-align: text-top;
+}
+
+
 .tabs{
   width: 100%;
-  top: 75px;
+  top: 100px;
   background-color: #5d916b;
   position: absolute;
   padding:0;
-
+}
+.para {
+  color: white;
 }
 .tab {
   overflow: hidden;
@@ -126,7 +168,7 @@ body {
   font-weight: 100;
   font-size: 20px;
   padding: 5px 5px;
-  line-height: 140%;
+  line-height: 200%;
 }
 .user{
   float: right;
@@ -151,9 +193,13 @@ body {
   cursor: pointer;
   font-size: 20px;
   border-radius: 12px;
+  margin: 5px;
 }
 /* Create an active/current tablink class */
 .tab:hover {
   background-color: #4c7356;
+}
+.bs{
+  line-height:  normal;
 }
 
