@@ -164,8 +164,8 @@ def home():
         commute) + consumer_footprt_percent(clothing_purchased,
         used_clothing, numPackages, fast_pkg),2)
         if current_user.is_active:#update user carbon use variable in databse
-                dailyFootprint = round(footprint/365, 2)
-                Userdb.todouserdb.update_one({'id': current_user.id}, {"$set": {'housing': housing,
+            dailyFootprint = round(footprint/365, 2)
+            Userdb.todouserdb.update_one({'id': current_user.id}, {"$set": {'housing': housing,
                                                                                 'numRooms': numRooms,
                                                                                 'diet': diet,
                                                                                 'numRoomates': numRoomates,
@@ -175,22 +175,21 @@ def home():
                                                                                 'clothing_purchased': clothing_purchased,
                                                                                 'numPackages': numPackages,
                                                                                 'fast_pkg': fast_pkg}})
-                data = Userdb.todouserdb.find_one({'id': current_user.id})
-                if 'footprint' in data:#make sure only one carbon input per day is calculated
-                    FootprintList = data['footprint']
-                    if FootprintList[len(FootprintList)-1][1] == str(date.today()):
-                        FootprintList[len(FootprintList)-1][0] = dailyFootprint
-                        Userdb.todouserdb.update_one({'id': current_user.id}, {"$set": {'footprint': FootprintList}})
-                    else:
-                        Userdb.todouserdb.update_one({'id': current_user.id}, {"$addToSet": {'footprint': [dailyFootprint, str(date.today())]}})
+            data = Userdb.todouserdb.find_one({'id': current_user.id})
+            if 'footprint' in data:#make sure only one carbon input per day is calculated
+                FootprintList = data['footprint']
+                if FootprintList[len(FootprintList)-1][1] == str(date.today()):
+                    FootprintList[len(FootprintList)-1][0] = dailyFootprint
+                    Userdb.todouserdb.update_one({'id': current_user.id}, {"$set": {'footprint': FootprintList}})
                 else:
                     Userdb.todouserdb.update_one({'id': current_user.id}, {"$addToSet": {'footprint': [dailyFootprint, str(date.today())]}})
-                flash("Your carbon footprint for today is " + str(dailyFootprint) + " lbs. of CO2")
-                #avg_carbon(footprint,str(current_user.id))
-                avg_carbon(data['footprint'], str(current_user.id))#????????????????????????????????????????????????????????????????????????????????????????????????????????????
+            else:
+                Userdb.todouserdb.update_one({'id': current_user.id}, {"$addToSet": {'footprint': [dailyFootprint, str(date.today())]}})
+            flash("Your carbon footprint is " + str(dailyFootprint) + " lbs. of CO2/day")
+            avg_carbon(data['footprint'], str(current_user.id))
         if form.submit.data:#caculating
-            flash('your carbon foot print is '+ str(footprint) + ' lbs. of CO2/yr.')
-            flash(avg_carbon_str(footprint))
+            flash('Your carbon foot print is '+ str(footprint) + ' lbs. of CO2/yr.')
+            #flash(avg_carbon_str(footprint))
         elif form.track_submit.data: #tracking
             return redirect(url_for("account"))
     if current_user.is_active:

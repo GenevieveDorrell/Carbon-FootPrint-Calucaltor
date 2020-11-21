@@ -27,7 +27,7 @@ def avg_carbon(usr_carbon, userID):
 
     path = "static/figures/"+userID+"_avg_carbon"#added username to create folders for user for syconicity
     plt.savefig(path, bbox_inches='tight', transparent=True)
-    plt.show()
+    #plt.show()
 
 def avg_carbon_str(usr_carbon):
     diff = round(AVG_CARBON - usr_carbon, 2)
