@@ -13,7 +13,7 @@ def avg_carbon(usr_carbon, userID):
         dcarbon.append(c[0])
         date = datetime.strptime(c[1], '%Y-%m-%d')
         dates.append(date)
-        
+
     acarbon = [DAILY_AVG] * len(dates)
     fig = go.Figure()
     fig.add_trace(go.Scatter(x=dates, y=dcarbon, line=dict(color='royalblue', width=4)))
@@ -23,6 +23,7 @@ def avg_carbon(usr_carbon, userID):
         {'plot_bgcolor':'rgba(0, 0, 0, 0)',
         'paper_bgcolor': 'rgba(0, 0, 0, 0)'},
         title="Your carbon vs. the average college student in a dorm",
+        title_x=0.5,
         xaxis = dict(
             tickmode='array',
             tickvals=dates)
