@@ -163,8 +163,12 @@ def home():
         numRooms, numRoomates) + travel_footprt(travel_mode,
         commute) + consumer_footprt_percent(clothing_purchased,
         used_clothing, numPackages, fast_pkg),2)
+        dailyFootprint = round(footprint/365, 2)
+        flash(avg_carbon_str(footprint))
+        flash("Your carbon footprint is " + str(dailyFootprint) + " lbs. of CO2/day")
+        flash('Your carbon foot print is '+ str(footprint) + ' lbs. of CO2/yr.')
         if current_user.is_active:#update user carbon use variable in databse
-            dailyFootprint = round(footprint/365, 2)
+            
             Userdb.todouserdb.update_one({'id': current_user.id}, {"$set": {'housing': housing,
                                                                                 'numRooms': numRooms,
                                                                                 'diet': diet,
@@ -185,12 +189,9 @@ def home():
                     Userdb.todouserdb.update_one({'id': current_user.id}, {"$addToSet": {'footprint': [dailyFootprint, str(date.today())]}})
             else:
                 Userdb.todouserdb.update_one({'id': current_user.id}, {"$addToSet": {'footprint': [dailyFootprint, str(date.today())]}})
-            flash("Your carbon footprint is " + str(dailyFootprint) + " lbs. of CO2/day")
-            avg_carbon(data['footprint'], str(current_user.id))
-        if form.submit.data:#caculating
-            flash('Your carbon foot print is '+ str(footprint) + ' lbs. of CO2/yr.')
-            #flash(avg_carbon_str(footprint))
-        elif form.track_submit.data: #tracking
+            
+            avg_carbon(data['footprint'], str(current_user.id))            
+        if form.track_submit.data: #tracking
             return redirect(url_for("account"))
     if current_user.is_active:
         data = Userdb.todouserdb.find_one({'id': current_user.id})#looks up the user in db
@@ -213,7 +214,9 @@ def account():
     form = CarbonFootprint()
     if form.delete.data:
             Userdb.todouserdb.delete_one({'id': current_user.id})
-            os.remove(str(current_user.id)+"_avg_carbon.png")
+            path = "static/figures/"+ userID +"_avg_carbon.png"
+            if os.path.exists(path):
+                os.remove(path)
             return redirect(url_for("logout"))
     data = Userdb.todouserdb.find_one({'id': current_user.id})
     print(data)

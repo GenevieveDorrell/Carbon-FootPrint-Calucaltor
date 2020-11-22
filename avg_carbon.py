@@ -5,6 +5,7 @@ DAILY_AVG = 17.45
 import plotly.graph_objects as go
 import plotly.io as pio
 from datetime import datetime
+import os
 
 def avg_carbon(usr_carbon, userID):
     pio.kaleido.scope.default_format = "png"
