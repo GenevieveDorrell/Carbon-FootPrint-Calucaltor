@@ -24,8 +24,10 @@ body {
   p{
     color: white;
     line-height: 200%;
+    text-align: center;
 
   }
+  
   #header {
     
     /*background-color: #5d916b;*/
@@ -98,7 +100,15 @@ body {
 }
 .para {
   color: white;
+  width: 70%;
+  margin: auto;
+  border: 3px solid #4c7356;
+  padding: 10px;
+  text-align: left;
+  line-height: 150%;
 }
+
+
 .tab {
   overflow: hidden;
   border: none;
@@ -199,7 +209,12 @@ body {
 .tab:hover {
   background-color: #4c7356;
 }
-.bs{
-  line-height:  normal;
+
+.links{
+  color: white;
 }
+.links:hover{
+  color: #314a38;
+}
+
 
