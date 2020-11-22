@@ -31,6 +31,7 @@ def avg_carbon(usr_carbon, userID):
     fig.update_yaxes(title="lbs. CO2")
     path = "static/figures/"+ userID +"_avg_carbon.png" # added username to create folders for user for syconicity
     fig.write_image(path)
+    return
 
 def avg_carbon_str(usr_carbon):
     diff = round(AVG_CARBON - usr_carbon, 2)
