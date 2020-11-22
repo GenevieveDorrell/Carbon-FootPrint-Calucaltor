@@ -16,8 +16,8 @@ def avg_carbon(usr_carbon, userID):
 
     acarbon = [DAILY_AVG] * len(dates)
     fig = go.Figure()
-    fig.add_trace(go.Scatter(name="Your carbon", x=dates, y=dcarbon, line=dict(color='royalblue', width=4)))
-    fig.add_trace(go.Scatter(name="Average student carbon", x=dates, y=acarbon, line=dict(color='firebrick', width=4, dash='dash')))
+    fig.add_trace(go.Scatter(name="Your carbon", x=dates, y=dcarbon, line=dict(color='brown', width=4)))
+    fig.add_trace(go.Scatter(name="Average student carbon", x=dates, y=acarbon, line=dict(color='darkolivegreen', width=4, dash='dash')))
 
     fig.update_layout(
         {'plot_bgcolor':'rgba(0, 0, 0, 0)',
