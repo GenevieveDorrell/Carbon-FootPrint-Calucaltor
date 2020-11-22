@@ -2,34 +2,35 @@
 AVG_CARBON = 6370.09
 DAILY_AVG = 17.45
 
-import matplotlib.pyplot as plt
-import matplotlib.dates as mdates
+import plotly.graph_objects as go
+import plotly.io as pio
 from datetime import datetime
 
 def avg_carbon(usr_carbon, userID):
+    pio.kaleido.scope.default_format = "png"
     dcarbon = []; dates = []
     for c in usr_carbon:
         dcarbon.append(c[0])
         date = datetime.strptime(c[1], '%Y-%m-%d')
         dates.append(date)
+        
+    acarbon = [DAILY_AVG] * len(dates)
+    fig = go.Figure()
+    fig.add_trace(go.Scatter(x=dates, y=dcarbon, line=dict(color='royalblue', width=4)))
+    fig.add_trace(go.Scatter(x=dates, y=acarbon, line=dict(color='firebrick', width=4, dash='dash')))
 
-    ax = plt.gca()
-    formatter = mdates.DateFormatter("%Y-%m-%d")
-    ax.xaxis.set_major_formatter(formatter)
-    locator = mdates.DayLocator()
-    ax.xaxis.set_major_locator(locator)
-    if (len(dates) > 1):
-        plt.plot(dates, dcarbon, linewidth=2, label="Your carbon")
-    else:
-        ax.axhline(dcarbon[0], linewidth=2, label="Your carbon (projected)")
-    ax.axhline(DAILY_AVG, linewidth=2, linestyle='--', color = 'r', label="Average carbon")
-    plt.title("Your carbon vs. the average college student in a dorm")
-    plt.ylabel("lbs. of CO2 per day")
-    plt.xlabel("Date")
-    plt.legend(facecolor='inherit')
-    path = "static/figures/"+ userID +"_avg_carbon"#added username to create folders for user for syconicity
-    plt.savefig(path, bbox_inches='tight', transparent=True)
-    #plt.show()
+    fig.update_layout(
+        {'plot_bgcolor':'rgba(0, 0, 0, 0)',
+        'paper_bgcolor': 'rgba(0, 0, 0, 0)'},
+        title="Your carbon vs. the average college student in a dorm",
+        xaxis = dict(
+            tickmode='array',
+            tickvals=dates)
+    )
+    fig.update_xaxes(title="Dates",tickformat = "%m/%d")
+    fig.update_yaxes(title="lbs. CO2")
+    path = "static/figures/"+ userID +"_avg_carbon.png" # added username to create folders for user for syconicity
+    fig.write_image(path)
 
 def avg_carbon_str(usr_carbon):
     diff = round(AVG_CARBON - usr_carbon, 2)

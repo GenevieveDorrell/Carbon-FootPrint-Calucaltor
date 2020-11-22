@@ -10,5 +10,8 @@ WTForms
 passlib
 Flask-Login
 gunicorn
-matplotlib
 datetime
+plotly
+requests
+psutil
+kaleido
