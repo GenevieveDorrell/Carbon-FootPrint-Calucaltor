@@ -16,18 +16,18 @@ from Travel import travel_footprt
 from Consumer import consumer_footprt_percent
 from datetime import date
 from avg_carbon import avg_carbon, avg_carbon_str
+from getMongoDB import get_mongodb
 
 #flask app home base
 csrf = CSRFProtect()
 app = Flask(__name__)
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 csrf.init_app(app)
-
-
-client = MongoClient('mongodb+srv://heroku:GP4Pm7euNlmOdXnF@cluster0.ffnmh.mongodb.net/todouserdb?retryWrites=true&w=majority')
-
+#connect to mongo cluster
+#mongodb+srv://heroku:GP4Pm7euNlmOdXnF@cluster0.ffnmh.mongodb.net/todouserdb?retryWrites=true&w=majority
+mongoDB = get_mongodb()
+client = MongoClient(mongoDB)
 Userdb = client.todouserdb
-
 
 login_manager = LoginManager()
 login_manager.setup_app(app)
@@ -35,6 +35,8 @@ login_manager.setup_app(app)
 login_manager.login_view = "login"
 login_manager.login_message = u"Please log in to access this page."
 login_manager.refresh_view = "reauth"
+
+#function used for html visualizations
 def logInOut():
     if current_user.is_active:
         return "Logout"
@@ -116,7 +118,7 @@ def login():
                 token = generate_auth_token()
                 Userdb.todouserdb.update_one(dbuser, {'$set': {'token': token}})
                 #flash('Logged in successfully.')
-                return redirect('/account')
+                return redirect('/')
             else:
                 flash('incorrect Password.')
         else:

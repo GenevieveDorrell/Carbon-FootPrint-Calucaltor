@@ -4,18 +4,16 @@
 According to the [New York Times](https://www.nytimes.com/guides/year-of-living-better/how-to-reduce-your-carbon-footprint), some of the largest sources of individual carbon emission are from transportation, diet, home electricity use, and consumer habits. This student carbon footprint calculator is here to help collge students understand, track, and reduce their carbon emissions over time!
 
 ## Setup-
-First have mongo DB installed on your computer or server. If you need to install it a free community version is avialable [here](https://www.mongodb.com/try/download/community).
+We have this application have running on heroku [here](https://student-carbon-footprint-calc.herokuapp.com/). It uses mongoDB cluters to keep track of users information. If you deploy this else where you must connect to a mongo database. Durring the build the comandline will ask for a mongodb server url. If you have mongogBD insalled on the computer or server you are deplyign the code on you can just enter 'mongodb://db:27017/'. You can also connect to a cluster like we did for our deplyment. This makes instaliation of mongoDB optional. To connect to a batabase on a cluster you must first create an account [here](https://www.mongodb.com/), and then follow the directions to to get the url connect to you cluster. It might ask you to out the databases name in the url you can put anyting you like.
 
 **Windows**
 1. Run the windowBuild.bat ('.\windowBuild.bat') to build a virtual environment and start running the program
-Note: To call run.cmd alone you must be in the virtual environment. 
-2. To reenter the virtual environment after it has been built use './env\Scripts\activate.bat'
+2. To restart the application but not rebuild the entire environment run '.\windows_rerun.cmd'
 3. Te exit the virual environment type 'deactivate'. Alternative there is a stop.cmd script
 
 **MacOS**
 1. Run UnixBuild.sh ('sh UnixBuild.sh') to build a virtual environment and start running the program
-Note: To call run.cmd alone you must be in the virtual environment. 
-2. To reenter the virtual environment after it has been built use 'source env/bin/activate'
+2. To restart the application but not rebuild the entire environment run 'source unix_rerun.cmd'
 3. Te exit the virual environment type 'deactivate'. Alternative there is a stop.cmd script
 
 ## Usage- 
