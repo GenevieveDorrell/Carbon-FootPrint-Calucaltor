@@ -1,6 +1,6 @@
 def get_mongodb():
     try:
-        f = open("mongoDBServer.txt", "r")
+        f = open("mongoDB_url.txt", "r")
         apikey = f.read()
         f.close()
         return apikey
@@ -10,6 +10,6 @@ def get_mongodb():
 
 if __name__ == "__main__":
     mongoDB = input("Please enter your local mongoDB server url or a cluster url from https://www.mongodb.com/. The name of the database in the cluster's url can be anythign: \n")
-    f = open("ApiKey.txt", "w")
+    f = open("mongoDB_url.txt", "w")
     f.write(mongoDB)
     f.close()

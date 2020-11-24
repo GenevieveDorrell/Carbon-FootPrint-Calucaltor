@@ -3,10 +3,10 @@ from flask import Flask, render_template, request, flash, redirect, url_for
 from werkzeug.utils import secure_filename
 from pymongo import MongoClient
 import logging
-from forms import LoginForm, CarbonFootprint, RegisterForm
+from Forms import LoginForm, CarbonFootprint, RegisterForm
 from flask_wtf.csrf import CSRFProtect
-from testToken import generate_auth_token, verify_auth_token
-from password import hash_password, verify_password
+from Token import generate_auth_token, verify_auth_token
+from Password import hash_password, verify_password
 from flask_login import (LoginManager, current_user, login_required,
                             login_user, logout_user, UserMixin,
                             confirm_login, fresh_login_required, current_user)

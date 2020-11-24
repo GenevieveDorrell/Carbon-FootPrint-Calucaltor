@@ -24,30 +24,56 @@ You must have python and pip preinstalled on your computer for the build scripts
 - geopy
 - Flask
 - gpxpy
+- wheel
 - pymongo
+- dnspython
 - Flask-PyMongo
 - Flask-WTF
 - WTForms
 - passlib
 - Flask-Login
-- matplotlib
+- gunicorn
+- datetime
+- plotly
+- requests
+- psutil
+- kaleido
 
 ## Files & Directories-
 
-* gpx_parser.py .
--Parses a gpx input file and returns data
+* Food.py .
+-Calcualtes carbon footprint based on users diet type
+
+* Consumer.py 
+-Calcualtes carbon footprint based on users shopping habits 
+
+* Travel.py .
+-Calcualtes carbon footprint based on users travel
+
+* avg_carbon.py 
+-Creates agraph of the users carbon footprint overtime
+
+* Forms.py 
+-using flaskforms it creates froms for the htmls pages
+
+* Token.py .
+-gives the user a token and loggs them out after a certian ammount of time
+
+* Password.py 
+-Hashes a users password for storage in the database as well as verifying the user is logging in with the correct password
+
+* getMongoDB.py
+-puts the database server url in mongoDB_url.txt and fetches the database url from mongoDB_url.txt
 
 * webApp.py
 -Contains code for the main web interface of the project.
 
 * static/
--Contains the css style sheet for the web GUI
+-Contains the css style sheet for the web GUI, as well as users figures and website graphics.
 
 * templates/
 -Contians the home html page.
 
-* tests/
--Contians .gpx files that you can use to test your setup.
 
 ## Acknowledgments-
 The electricity and carbon estimations based on certain activities were based on the following sources:
