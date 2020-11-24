@@ -3,10 +3,10 @@ from flask import Flask, render_template, request, flash, redirect, url_for
 from werkzeug.utils import secure_filename
 from pymongo import MongoClient
 import logging
-from forms import LoginForm, CarbonFootprint, RegisterForm
+from Forms import LoginForm, CarbonFootprint, RegisterForm
 from flask_wtf.csrf import CSRFProtect
-from testToken import generate_auth_token, verify_auth_token
-from password import hash_password, verify_password
+from Token import generate_auth_token, verify_auth_token
+from Password import hash_password, verify_password
 from flask_login import (LoginManager, current_user, login_required,
                             login_user, logout_user, UserMixin,
                             confirm_login, fresh_login_required, current_user)
@@ -16,18 +16,18 @@ from Travel import travel_footprt
 from Consumer import consumer_footprt_percent
 from datetime import date
 from avg_carbon import avg_carbon, avg_carbon_str
+from getMongoDB import get_mongodb
 
 #flask app home base
 csrf = CSRFProtect()
 app = Flask(__name__)
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 csrf.init_app(app)
-
-
-client = MongoClient('mongodb+srv://heroku:GP4Pm7euNlmOdXnF@cluster0.ffnmh.mongodb.net/todouserdb?retryWrites=true&w=majority')
-
+#connect to mongo cluster
+#mongodb+srv://heroku:GP4Pm7euNlmOdXnF@cluster0.ffnmh.mongodb.net/todouserdb?retryWrites=true&w=majority
+mongoDB = get_mongodb()
+client = MongoClient(mongoDB)
 Userdb = client.todouserdb
-
 
 login_manager = LoginManager()
 login_manager.setup_app(app)
@@ -35,6 +35,8 @@ login_manager.setup_app(app)
 login_manager.login_view = "login"
 login_manager.login_message = u"Please log in to access this page."
 login_manager.refresh_view = "reauth"
+
+#function used for html visualizations
 def logInOut():
     if current_user.is_active:
         return "Logout"
@@ -116,7 +118,7 @@ def login():
                 token = generate_auth_token()
                 Userdb.todouserdb.update_one(dbuser, {'$set': {'token': token}})
                 #flash('Logged in successfully.')
-                return redirect('/account')
+                return redirect('/')
             else:
                 flash('incorrect Password.')
         else:
@@ -163,8 +165,12 @@ def home():
         numRooms, numRoomates) + travel_footprt(travel_mode,
         commute) + consumer_footprt_percent(clothing_purchased,
         used_clothing, numPackages, fast_pkg),2)
+        dailyFootprint = round(footprint/365, 2)
+        flash(avg_carbon_str(footprint))
+        flash("Your carbon footprint is " + str(dailyFootprint) + " lbs. of CO2/day")
+        flash('Your carbon foot print is '+ str(footprint) + ' lbs. of CO2/yr.')
         if current_user.is_active:#update user carbon use variable in databse
-            dailyFootprint = round(footprint/365, 2)
+            
             Userdb.todouserdb.update_one({'id': current_user.id}, {"$set": {'housing': housing,
                                                                                 'numRooms': numRooms,
                                                                                 'diet': diet,
@@ -185,12 +191,9 @@ def home():
                     Userdb.todouserdb.update_one({'id': current_user.id}, {"$addToSet": {'footprint': [dailyFootprint, str(date.today())]}})
             else:
                 Userdb.todouserdb.update_one({'id': current_user.id}, {"$addToSet": {'footprint': [dailyFootprint, str(date.today())]}})
-            flash("Your carbon footprint is " + str(dailyFootprint) + " lbs. of CO2/day")
-            avg_carbon(data['footprint'], str(current_user.id))
-        if form.submit.data:#caculating
-            flash('Your carbon foot print is '+ str(footprint) + ' lbs. of CO2/yr.')
-            #flash(avg_carbon_str(footprint))
-        elif form.track_submit.data: #tracking
+            
+            avg_carbon(data['footprint'], str(current_user.id))            
+        if form.track_submit.data: #tracking
             return redirect(url_for("account"))
     if current_user.is_active:
         data = Userdb.todouserdb.find_one({'id': current_user.id})#looks up the user in db
@@ -213,7 +216,9 @@ def account():
     form = CarbonFootprint()
     if form.delete.data:
             Userdb.todouserdb.delete_one({'id': current_user.id})
-            os.remove(str(current_user.id)+"_avg_carbon.png")
+            path = "static/figures/"+ userID +"_avg_carbon.png"
+            if os.path.exists(path):
+                os.remove(path)
             return redirect(url_for("logout"))
     data = Userdb.todouserdb.find_one({'id': current_user.id})
     print(data)

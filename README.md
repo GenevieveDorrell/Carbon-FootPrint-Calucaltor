@@ -4,18 +4,16 @@
 According to the [New York Times](https://www.nytimes.com/guides/year-of-living-better/how-to-reduce-your-carbon-footprint), some of the largest sources of individual carbon emission are from transportation, diet, home electricity use, and consumer habits. This student carbon footprint calculator is here to help collge students understand, track, and reduce their carbon emissions over time!
 
 ## Setup-
-First have mongo DB installed on your computer or server. If you need to install it a free community version is avialable [here](https://www.mongodb.com/try/download/community).
+We have this application have running on heroku [here](https://student-carbon-footprint-calc.herokuapp.com/). It uses mongoDB cluters to keep track of users information. If you deploy this else where you must connect to a mongo database. Durring the build the comandline will ask for a mongodb server url. If you have mongogBD insalled on the computer or server you are deplyign the code on you can just enter 'mongodb://db:27017/'. You can also connect to a cluster like we did for our deplyment. This makes instaliation of mongoDB optional. To connect to a batabase on a cluster you must first create an account [here](https://www.mongodb.com/), and then follow the directions to to get the url connect to you cluster. It might ask you to out the databases name in the url you can put anyting you like.
 
 **Windows**
 1. Run the windowBuild.bat ('.\windowBuild.bat') to build a virtual environment and start running the program
-Note: To call run.cmd alone you must be in the virtual environment. 
-2. To reenter the virtual environment after it has been built use './env\Scripts\activate.bat'
+2. To restart the application but not rebuild the entire environment run '.\windows_rerun.cmd'
 3. Te exit the virual environment type 'deactivate'. Alternative there is a stop.cmd script
 
 **MacOS**
 1. Run UnixBuild.sh ('sh UnixBuild.sh') to build a virtual environment and start running the program
-Note: To call run.cmd alone you must be in the virtual environment. 
-2. To reenter the virtual environment after it has been built use 'source env/bin/activate'
+2. To restart the application but not rebuild the entire environment run 'source unix_rerun.cmd'
 3. Te exit the virual environment type 'deactivate'. Alternative there is a stop.cmd script
 
 ## Usage- 
@@ -26,30 +24,56 @@ You must have python and pip preinstalled on your computer for the build scripts
 - geopy
 - Flask
 - gpxpy
+- wheel
 - pymongo
+- dnspython
 - Flask-PyMongo
 - Flask-WTF
 - WTForms
 - passlib
 - Flask-Login
-- matplotlib
+- gunicorn
+- datetime
+- plotly
+- requests
+- psutil
+- kaleido
 
 ## Files & Directories-
 
-* gpx_parser.py .
--Parses a gpx input file and returns data
+* Food.py .
+-Calcualtes carbon footprint based on users diet type
+
+* Consumer.py 
+-Calcualtes carbon footprint based on users shopping habits 
+
+* Travel.py .
+-Calcualtes carbon footprint based on users travel
+
+* avg_carbon.py 
+-Creates agraph of the users carbon footprint overtime
+
+* Forms.py 
+-using flaskforms it creates froms for the htmls pages
+
+* Token.py .
+-gives the user a token and loggs them out after a certian ammount of time
+
+* Password.py 
+-Hashes a users password for storage in the database as well as verifying the user is logging in with the correct password
+
+* getMongoDB.py
+-puts the database server url in mongoDB_url.txt and fetches the database url from mongoDB_url.txt
 
 * webApp.py
 -Contains code for the main web interface of the project.
 
 * static/
--Contains the css style sheet for the web GUI
+-Contains the css style sheet for the web GUI, as well as users figures and website graphics.
 
 * templates/
 -Contians the home html page.
 
-* tests/
--Contians .gpx files that you can use to test your setup.
 
 ## Acknowledgments-
 The electricity and carbon estimations based on certain activities were based on the following sources:
