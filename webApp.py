@@ -212,9 +212,9 @@ def home():
 
 @app.route('/account', methods=['POST', 'GET'])#home page
 @login_required
-image = str(current_user.id)+"_avg_carbon.png"
 def account():
     form = CarbonFootprint()
+    image = str(current_user.id)+"_avg_carbon.png"
     if form.delete.data:
             Userdb.todouserdb.delete_one({'id': current_user.id})
             path = "static/figures/"+ userID +"_avg_carbon.png"
