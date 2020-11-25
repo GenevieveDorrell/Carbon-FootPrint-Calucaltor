@@ -222,7 +222,6 @@ def account():
                 os.remove(path)
             return redirect(url_for("logout"))
     data = Userdb.todouserdb.find_one({'id': current_user.id})
-    print(data)
     if 'footprint' not in data:
         flash("We have no carbon data on your account go to the carbon calculator")
         image = "no_data_avg_carbon.png"
