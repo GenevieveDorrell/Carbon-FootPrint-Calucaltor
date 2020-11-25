@@ -94,7 +94,7 @@ def register():
             Userdb.todouserdb.insert_one(item_doc)#add user to userdb
             return redirect(url_for("login"))
         else:
-            flash("that username is already taken")
+            flash("That username is already taken")
     return render_template('register.html',  title='Register', form=form, loggedIn = logInOut())
 # step 3 in slides
 
@@ -120,9 +120,9 @@ def login():
                 #flash('Logged in successfully.')
                 return redirect('/')
             else:
-                flash('incorrect Password.')
+                flash('Incorrect Password.')
         else:
-            flash('unregistered user')
+            flash('Unregistered user')
     return render_template('login.html',  title='Sign In', form=form, loggedIn = logInOut())
 
 @app.route("/reauth", methods=["GET", "POST"])
@@ -170,7 +170,7 @@ def home():
         flash("Your carbon footprint is " + str(dailyFootprint) + " lbs. of CO2/day")
         flash('Your carbon foot print is '+ str(footprint) + ' lbs. of CO2/yr.')
         if current_user.is_active:#update user carbon use variable in databse
-            
+
             Userdb.todouserdb.update_one({'id': current_user.id}, {"$set": {'housing': housing,
                                                                                 'numRooms': numRooms,
                                                                                 'diet': diet,
@@ -191,8 +191,8 @@ def home():
                     Userdb.todouserdb.update_one({'id': current_user.id}, {"$addToSet": {'footprint': [dailyFootprint, str(date.today())]}})
             else:
                 Userdb.todouserdb.update_one({'id': current_user.id}, {"$addToSet": {'footprint': [dailyFootprint, str(date.today())]}})
-            
-            avg_carbon(data['footprint'], str(current_user.id))            
+
+            avg_carbon(data['footprint'], str(current_user.id))
         if form.track_submit.data: #tracking
             return redirect(url_for("account"))
     if current_user.is_active:
@@ -223,5 +223,5 @@ def account():
     data = Userdb.todouserdb.find_one({'id': current_user.id})
     print(data)
     if 'footprint' not in data:
-        flash("we have no carbon data on your account go to the carbon calculator")
+        flash("We have no carbon data on your account go to the carbon calculator")
     return render_template('account.html', title = 'Home', form = form, loggedIn = logInOut(), image= str(current_user.id)+"_avg_carbon.png")
