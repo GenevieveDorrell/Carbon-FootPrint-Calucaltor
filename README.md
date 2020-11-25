@@ -77,7 +77,8 @@ You must have python and pip preinstalled on your computer for the build scripts
 * templates/
 -Contians the home html page.
 
-
+## Testing-
+Each individualt python file in the backend can be run as main to get automated unit testing. (ex. python Food.py)
 ## Acknowledgments-
 The electricity and carbon estimations based on certain activities were based on the following sources:
 
