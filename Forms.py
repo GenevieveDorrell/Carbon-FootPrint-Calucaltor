@@ -25,7 +25,7 @@ class RegisterForm(FlaskForm):
 class CarbonFootprint(FlaskForm):
     food = SelectField('Diet', choices=[('vegan', 'vegan'), ('vegetarian', 'vegetarian'),
      ('white_meat_only', 'white meat only'), ('med_meat', 'medium meat'), ('high_meat', 'high meat')])
-    travel_method = SelectField('Transportation', choices=[('gcar','gas car'),('hcar', 'hybrid car'),('bus', 'bus'),('non_motor', 'walk or bike')])
+    travel_method = SelectField('Transportation', choices=[('gcar','gas car'),('hcar', 'hybrid car'),('bus', 'bus'),('non_motor', 'walk or bike'),('ecar', 'electric car')])
     distance = IntegerField('Daily Commute (one way)', validators=[InputRequired(), NumberRange(min=0, max=None, message="Cannot enter a negative distance")])
     housing = SelectField('Housing', choices=[('dorm', 'dorm'),('off_apartment','apartment'),('off_house','house')])
     numRooms = IntegerField('Bedrooms', validators=[InputRequired(), NumberRange(min=0, max=None, message="Cannot enter a negative distance")])

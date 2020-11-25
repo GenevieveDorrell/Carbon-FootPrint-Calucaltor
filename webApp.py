@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template, request, flash, redirect, url_for
+from flask import Flask, render_template, request, flash, redirect, url_for, send_from_directory
 from werkzeug.utils import secure_filename
 from pymongo import MongoClient
 import logging
@@ -98,6 +98,7 @@ def register():
     return render_template('register.html',  title='Register', form=form, loggedIn = logInOut())
 # step 3 in slides
 
+
 # This is one way. Using WTForms is another way.
 @app.route("/login", methods=["GET", "POST"])
 def login():
@@ -191,7 +192,7 @@ def home():
                     Userdb.todouserdb.update_one({'id': current_user.id}, {"$addToSet": {'footprint': [dailyFootprint, str(date.today())]}})
             else:
                 Userdb.todouserdb.update_one({'id': current_user.id}, {"$addToSet": {'footprint': [dailyFootprint, str(date.today())]}})
-
+            data = Userdb.todouserdb.find_one({'id': current_user.id})
             avg_carbon(data['footprint'], str(current_user.id))
         if form.track_submit.data: #tracking
             return redirect(url_for("account"))
