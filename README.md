@@ -1,4 +1,5 @@
 # Student Carbon Foot Print Calcualtor 
+> Created by Genevieve Dorrell and Jacob Evarts
 
 ## Info-
 According to the [New York Times](https://www.nytimes.com/guides/year-of-living-better/how-to-reduce-your-carbon-footprint), some of the largest sources of individual carbon emission are from transportation, diet, home electricity use, and consumer habits. This student carbon footprint calculator is here to help collge students understand, track, and reduce their carbon emissions over time!
