@@ -21,7 +21,7 @@ If you deploy this else where you must connect to a mongo database. During the b
 3. Te exit the virual environment type 'deactivate'. Alternative there is a stop.cmd script
 
 ## Usage- 
-The website allows you to enter in various attributes in your life to calculate how much carbon you use on a day and a (projected) year. If you register an account, you can calculate your carbon over multiple days to get tracking statistics and comparisons against the average college student.
+The website allows you to enter in various attributes in your life to calculate how much carbon you use on a day and a (projected) year. If you register an account, you can calculate your carbon over multiple days to get tracking statistics and comparisons against the average college student. The website was developed using the google chrome browser so use chrome for the best user experince. 
 
 ## Requirements-
 You must have python and pip preinstalled on your computer for the build scripts to work. Our web aplication will then build the virtual environment and install these third party packages within the environment. 
@@ -79,7 +79,7 @@ You must have python and pip preinstalled on your computer for the build scripts
 -Contians the home html page.
 
 ## Testing-
-Each individual python file in the backend can be run as main to get automated unit testing. (ex. python Food.py)
+Each individual python file in the backend can be run as main to get automated unit testing. (ex. python Food.py) We did all user testing in google chrome so it is chrome compatable. 
 ## Acknowledgments-
 The electricity and carbon estimations based on certain activities were based on the following sources:
 
