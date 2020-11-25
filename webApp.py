@@ -212,6 +212,7 @@ def home():
 
 @app.route('/account', methods=['POST', 'GET'])#home page
 @login_required
+image = str(current_user.id)+"_avg_carbon.png"
 def account():
     form = CarbonFootprint()
     if form.delete.data:
@@ -224,4 +225,5 @@ def account():
     print(data)
     if 'footprint' not in data:
         flash("We have no carbon data on your account go to the carbon calculator")
-    return render_template('account.html', title = 'Home', form = form, loggedIn = logInOut(), image= str(current_user.id)+"_avg_carbon.png")
+        image = "static/resources/no_data_avg_carbon.png"
+    return render_template('account.html', title = 'Home', form = form, loggedIn = logInOut(), image= image)
