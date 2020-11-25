@@ -225,5 +225,5 @@ def account():
     print(data)
     if 'footprint' not in data:
         flash("We have no carbon data on your account go to the carbon calculator")
-        image = "static/resources/no_data_avg_carbon.png"
+        image = "no_data_avg_carbon.png"
     return render_template('account.html', title = 'Home', form = form, loggedIn = logInOut(), image= image)
