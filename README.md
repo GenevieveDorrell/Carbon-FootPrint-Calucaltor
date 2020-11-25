@@ -44,13 +44,13 @@ You must have python and pip preinstalled on your computer for the build scripts
 
 ## Files & Directories-
 
-* Food.py .
+* Food.py
 -Calcualtes carbon footprint based on users diet type
 
 * Consumer.py 
 -Calcualtes carbon footprint based on users shopping habits 
 
-* Travel.py .
+* Travel.py
 -Calcualtes carbon footprint based on users travel
 
 * avg_carbon.py 
@@ -59,7 +59,7 @@ You must have python and pip preinstalled on your computer for the build scripts
 * Forms.py 
 -using flaskforms it creates froms for the htmls pages
 
-* Token.py .
+* Token.py
 -gives the user a token and loggs them out after a certian ammount of time
 
 * Password.py 
