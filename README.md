@@ -4,7 +4,10 @@
 According to the [New York Times](https://www.nytimes.com/guides/year-of-living-better/how-to-reduce-your-carbon-footprint), some of the largest sources of individual carbon emission are from transportation, diet, home electricity use, and consumer habits. This student carbon footprint calculator is here to help collge students understand, track, and reduce their carbon emissions over time!
 
 ## Setup-
-We have this application have running on heroku [here](https://student-carbon-footprint-calc.herokuapp.com/). It uses mongoDB cluters to keep track of users information. If you deploy this else where you must connect to a mongo database. Durring the build the comandline will ask for a mongodb server url. If you have mongogBD insalled on the computer or server you are deplyign the code on you can just enter 'mongodb://db:27017/'. You can also connect to a cluster like we did for our deplyment. This makes instaliation of mongoDB optional. To connect to a batabase on a cluster you must first create an account [here](https://www.mongodb.com/), and then follow the directions to to get the url connect to you cluster. It might ask you to out the databases name in the url you can put anyting you like.
+# Heroku hosted website (recommended):
+We have this application have running on heroku [here](https://student-carbon-footprint-calc.herokuapp.com/). It uses mongoDB cluters to keep track of users information. 
+# Building and deploying yourself:
+If you deploy this else where you must connect to a mongo database. During the build the comandline will ask for a mongodb server url. If you have mongogBD insalled on the computer or server you are deplyign the code on you can just enter 'mongodb://db:27017/'. You can also connect to a cluster like we did for our deplyment. This makes instaliation of mongoDB optional. To connect to a batabase on a cluster you must first create an account [here](https://www.mongodb.com/), and then follow the directions to to get the url connect to you cluster. It might ask you to out the databases name in the url you can put anyting you like.
 
 **Windows**
 1. Run the windowBuild.bat ('.\windowBuild.bat') to build a virtual environment and start running the program
@@ -17,7 +20,7 @@ We have this application have running on heroku [here](https://student-carbon-fo
 3. Te exit the virual environment type 'deactivate'. Alternative there is a stop.cmd script
 
 ## Usage- 
-TODO
+The website allows you to enter in various attributes in your life to calculate how much carbon you use on a day and a (projected) year. If you register an account, you can calculate your carbon over multiple days to get tracking statistics and comparisons against the average college student.
 
 ## Requirements-
 You must have python and pip preinstalled on your computer for the build scripts to work. Our web aplication will then build the virtual environment and install these third party packages within the environment. 
